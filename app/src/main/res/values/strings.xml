@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HelloAndroid</string>
+
+    <string name="hello_world">HELLO WORLD</string>
+    <string name="action_settings">Settings</string>
+    <string name="growShrink">Grow</string>
+    <string name="animationShrink">GrowAnimation</string>
+
+</resources>
