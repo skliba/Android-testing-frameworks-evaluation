@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
             ft.replace(R.id.landList, new NoteListFragment(), "listFragment");
             ft.addToBackStack(null);
             ft.commit();
-
+            // test
 
         }
     }
