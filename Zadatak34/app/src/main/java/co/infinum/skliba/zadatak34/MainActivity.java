@@ -38,7 +38,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         NoteListFragment listNote = new NoteListFragment();
-        EditNoteFragment editNote = new EditNoteFragment();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
@@ -59,10 +58,11 @@ public class MainActivity extends ActionBarActivity {
             clearBackStack();
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.containter, new EditNoteFragment());
-            ft.replace(R.id.landList, new NoteListFragment(), "listFragment");
-            ft.addToBackStack(null);
             ft.commit();
-            // test
+            android.support.v4.app.FragmentTransaction _ft = getSupportFragmentManager().beginTransaction();
+            _ft.replace(R.id.landList, new NoteListFragment(), "listFragment");
+            _ft.commit();
+
 
         }
     }
