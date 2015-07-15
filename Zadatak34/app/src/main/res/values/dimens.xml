@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="noNotesPadding">10dp</dimen>
+    <dimen name="noNotesIconDimension">48dp</dimen>
+    <dimen name="editNoteTitleTextViewFontSize">15sp</dimen>
+    <dimen name="editNoteTitleTextViewPadding">10dp</dimen>
+    <dimen name="editNoteNameMarginLeft">15dp</dimen>
+    <dimen name="listItemNoteTitleSize">20sp</dimen>
+</resources>
