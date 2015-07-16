@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editNoteTitleTextView"
         android:layout_marginLeft="@dimen/editNoteNameMarginLeft"
-        android:id="@+id/fileTitle"/>
+        android:id="@+id/fileTitle" />
 
     <EditText
         android:layout_width="match_parent"
@@ -24,6 +24,6 @@
         android:gravity="top"
         android:layout_below="@+id/fileTitle"
         android:layout_marginLeft="@dimen/editNoteNameMarginLeft"
-        android:id="@+id/fileContent"/>
+        android:id="@+id/fileContent" />
 
 </RelativeLayout>

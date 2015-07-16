@@ -96,11 +96,10 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
     }
 
     private void performFragmentTransaction(FragmentTransaction ft, EditNoteFragment editNoteFragment) {
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             ft.replace(R.id.containter, editNoteFragment, MainActivity.EDIT_FRAGMENT_TAG);
             ft.addToBackStack(null);
-        }
-        else{
+        } else {
             ft.replace(R.id.landEdit, editNoteFragment, MainActivity.EDIT_FRAGMENT_TAG);
         }
         ft.commit();
@@ -139,7 +138,7 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
         startActivity(intent);
     }
 
-    public void updateList(){
+    public void updateList() {
         refreshView(getActivity().findViewById(R.id.root_view));
     }
 
