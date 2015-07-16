@@ -1,5 +1,6 @@
 package co.infinum.skliba.zadatak34;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
+import co.infinum.skliba.zadatak34.interfaces.OnFileSelectedListener;
 
 /**
  * Created by noxqs on 10.07.15..
@@ -32,9 +34,21 @@ import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
 public class NoteListFragment extends android.support.v4.app.Fragment implements MenuClickHandler {
 
     private ArrayList<FileInfo> arrList;
+    private OnFileSelectedListener mCallback;
 
     public NoteListFragment() {
 
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnFileSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFileSelectedListener");
+        }
     }
 
     @Nullable
@@ -60,8 +74,7 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                performFragmentTransaction(ft, EditNoteFragment.newInstance(null));
+                mCallback.onFileSelected(null);
             }
         });
 
@@ -93,17 +106,6 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
                 listView.setAdapter(new RecyclerViewAdapter(getActivity().getApplicationContext(), arrList));
             }
         }
-    }
-
-    private void performFragmentTransaction(FragmentTransaction ft, EditNoteFragment editNoteFragment) {
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            ft.replace(R.id.containter, editNoteFragment, MainActivity.EDIT_FRAGMENT_TAG);
-            ft.addToBackStack(null);
-        }
-        else{
-            ft.replace(R.id.landEdit, editNoteFragment, MainActivity.EDIT_FRAGMENT_TAG);
-        }
-        ft.commit();
     }
 
     @Override
@@ -185,11 +187,8 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
 
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                EditNoteFragment editNoteFragment = EditNoteFragment.newInstance(arrayList.get((int) fileTitle.getTag()).getFileName() + ".txt");
-                performFragmentTransaction(ft, editNoteFragment);
+                mCallback.onFileSelected(arrayList.get((int) fileTitle.getTag()).getFileName() + ".txt");
             }
         }
-
     }
 }

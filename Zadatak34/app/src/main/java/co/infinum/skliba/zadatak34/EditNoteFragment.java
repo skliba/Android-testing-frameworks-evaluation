@@ -1,5 +1,6 @@
 package co.infinum.skliba.zadatak34;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
+import co.infinum.skliba.zadatak34.interfaces.OnFileAddedListener;
 
 /**
  * Created by noxqs on 10.07.15..
@@ -41,6 +43,7 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
     private EditText fileContent;
     private String content = "";
     private Menu itemGlobal;
+    private OnFileAddedListener mCallback;
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -67,6 +70,17 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
         arguments.putString(MainActivity.FILE_NAME, fileName);
         editNoteFragment.setArguments(arguments);
         return editNoteFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnFileAddedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFileSelectedListener");
+        }
     }
 
     @Override
@@ -212,15 +226,8 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
                 e.printStackTrace();
             }
 
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                refreshList();
-            }
+            mCallback.onFileAdded();
         }
-    }
-
-    private void refreshList() {
-        NoteListFragment fragment = (NoteListFragment) getActivity().getSupportFragmentManager().findFragmentByTag(MainActivity.LIST_FRAGMENT_TAG);
-        fragment.updateList();
     }
 
     private boolean isExternalStorageWritable() {
@@ -246,9 +253,5 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
             outState.putString(FILE_CONTENT, fileContent.getText().toString());
         }
         super.onSaveInstanceState(outState);
-    }
-
-    public String getFileName() {
-        return fileName;
     }
 }

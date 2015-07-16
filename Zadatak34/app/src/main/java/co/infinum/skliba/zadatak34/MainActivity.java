@@ -4,58 +4,45 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
+import co.infinum.skliba.zadatak34.interfaces.OnFileAddedListener;
+import co.infinum.skliba.zadatak34.interfaces.OnFileSelectedListener;
 
 
-public class MainActivity extends ActionBarActivity implements MenuClickHandler{
+public class MainActivity extends ActionBarActivity implements MenuClickHandler, OnFileAddedListener, OnFileSelectedListener {
 
-    public static final String LIST_FRAGMENT_TAG = "LIST_FRAGMENT_TAG";
-    public static final String EDIT_FRAGMENT_TAG = "EDIT_FRAGMENT_TAG";
     public static final String FILE_NAME = "FILE_NAME";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String fileName = null;
-        if (savedInstanceState != null && savedInstanceState.containsKey(FILE_NAME)) {
-            fileName = savedInstanceState.getString(FILE_NAME);
-        }
-
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-
-            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.containter, new NoteListFragment(), LIST_FRAGMENT_TAG);
-            ft.commit();
-            // ako smo radili na nekom doumentu mijenjamo list fragment s edit fragmentom i stavljamo list na back stack
-            // inace normalno prikazujemo list fragment jer nema smisla pokazati prazan dokument
-            if (fileName != null) {
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.containter, EditNoteFragment.newInstance(fileName), EDIT_FRAGMENT_TAG);
-                ft.addToBackStack(null);
+        if (savedInstanceState == null) {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.containter, new NoteListFragment());
                 ft.commit();
             }
-
         } else {
-            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.landList, new NoteListFragment(), LIST_FRAGMENT_TAG);
-            ft.commit();
-            ft.replace(R.id.landEdit, EditNoteFragment.newInstance(fileName), EDIT_FRAGMENT_TAG);
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.commit();
-        }
-    }
-
-    private void clearBackStack() {
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        if (manager.getBackStackEntryCount() > 0) {
-            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.containter);
+            if (currentFragment != null) {
+                if (currentFragment instanceof NoteListFragment) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.remove(currentFragment);
+                    ft.commit();
+                }
+            } else {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.containter, new NoteListFragment());
+                ft.commit();
+            }
         }
     }
 
@@ -83,10 +70,6 @@ public class MainActivity extends ActionBarActivity implements MenuClickHandler{
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        EditNoteFragment editNoteFragment = (EditNoteFragment) getSupportFragmentManager().findFragmentByTag(EDIT_FRAGMENT_TAG);
-        if (editNoteFragment != null) {
-            outState.putString(FILE_NAME, editNoteFragment.getFileName());
-        }
         super.onSaveInstanceState(outState);
     }
 
@@ -99,5 +82,36 @@ public class MainActivity extends ActionBarActivity implements MenuClickHandler{
     public void handleSettingsButtonClick() {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onFileAdded() {
+        NoteListFragment noteListFragment = (NoteListFragment) getSupportFragmentManager().findFragmentById(R.id.note_list_fragment);
+        if (noteListFragment != null) {
+            noteListFragment.updateList();
+        }
+    }
+
+    @Override
+    public void onFileSelected(String fileName) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.containter, EditNoteFragment.newInstance(fileName));
+        ft.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            finish();
+        } else {
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.containter);
+            if (currentFragment != null && currentFragment instanceof EditNoteFragment) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.containter, new NoteListFragment());
+                ft.commit();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 }

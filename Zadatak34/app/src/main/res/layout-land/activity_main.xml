@@ -6,14 +6,15 @@
     android:orientation="horizontal"
     android:weightSum="1">
 
-    <FrameLayout
-        android:id="@+id/landList"
+    <fragment
+        android:id="@+id/note_list_fragment"
+        class="co.infinum.skliba.zadatak34.NoteListFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5" />
 
     <FrameLayout
-        android:id="@+id/landEdit"
+        android:id="@+id/containter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5" />
