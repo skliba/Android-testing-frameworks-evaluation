@@ -3,12 +3,17 @@ package co.infinum.skliba.zadatak34;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.Locale;
 
 import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
 import co.infinum.skliba.zadatak34.interfaces.OnFileAddedListener;
@@ -16,19 +21,18 @@ import co.infinum.skliba.zadatak34.interfaces.OnFileSelectedListener;
 
 
 public class MainActivity extends ActionBarActivity implements MenuClickHandler, OnFileAddedListener, OnFileSelectedListener {
-
     public static final String FILE_NAME = "FILE_NAME";
+    public static final String SELECTED_LANGUAGE_POSITION = "SELECTED LANGUAGE POSITION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        checkSettings();
         if (savedInstanceState == null) {
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.containter, new NoteListFragment());
-                ft.commit();
             }
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.containter);
@@ -45,6 +49,18 @@ public class MainActivity extends ActionBarActivity implements MenuClickHandler,
             }
         }
     }
+
+    private void checkSettings() {
+        int locale = PreferenceManager.getDefaultSharedPreferences(this).getInt(SELECTED_LANGUAGE_POSITION, -1);
+        if (locale != -1) {
+            String lang = "";
+            if (locale == 0) lang = "en";
+            else if (locale == 1) lang = "hr";
+            else if (locale == 2) lang = "it";
+            setLocale(lang);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,5 +129,14 @@ public class MainActivity extends ActionBarActivity implements MenuClickHandler,
                 super.onBackPressed();
             }
         }
+    }
+
+    private void setLocale(String selectedLanguage) {
+        Locale myLocale = new Locale(selectedLanguage);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
 }

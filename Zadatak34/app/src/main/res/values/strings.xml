@@ -14,13 +14,17 @@
     <string name="textViewLanguageText">Language</string>
     <string name="textViewColor">Color</string>
     <string-array name="language_list">
-        <item>English</item>
-        <item>Croatian</item>
-        <item>Italian</item>
+        <item name="English">English</item>
+        <item name="Croatian">Croatian</item>
+        <item name="Italian">Italian</item>
     </string-array>
     <string-array name="color_list">
-        <item>Blue</item>
-        <item>Yellow</item>
-        <item>Red</item>
+        <item name="blue">@string/blue</item>
+        <item name="green">@string/green</item>
+        <item name="red">@string/red</item>
     </string-array>
+
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="red">Red</string>
 </resources>

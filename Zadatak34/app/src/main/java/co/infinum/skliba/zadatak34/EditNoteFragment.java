@@ -2,11 +2,15 @@ package co.infinum.skliba.zadatak34;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,6 +41,8 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
     private static final String DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles/";
     private static final String CHANGES_OCCURRED = "CHANGES OCCURRED";
     private static final String FILE_CONTENT = "FILE_CONTENT";
+    public static final String SELECTED_COLOR = "SELECTED COLOR";
+    public static final String SELECTED_COLOR_POSITION = "SELECTED COLOR POSITION";
     private boolean changes = false;
     private String fileName;
     private EditText fileTitle;
@@ -113,6 +119,8 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
             }
         }
 
+        checkColors(view);
+
         if (fileName != null && !fileName.isEmpty()) {
             String fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf("."));
             fileTitle.setText(fileNameWithoutExtension);
@@ -125,7 +133,6 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
                         BufferedReader buffer = new BufferedReader(new FileReader(file));
 
                         String line;
-
                         while ((line = buffer.readLine()) != null) {
                             content += line + "\n";
                         }
@@ -136,6 +143,24 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
                 }
             }
             fileContent.setText(content);
+        }
+
+    }
+
+    private void checkColors(View view) {
+
+        int colorPos = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).getInt(SELECTED_COLOR_POSITION, -1);
+        if (colorPos != -1) {
+            if (colorPos == 0) {
+                ((EditText) view.findViewById(R.id.fileTitle)).setTextColor(Color.BLUE);
+                ((EditText) view.findViewById(R.id.fileContent)).setTextColor(Color.BLUE);
+            } else if (colorPos == 1) {
+                ((EditText) view.findViewById(R.id.fileTitle)).setTextColor(Color.GREEN);
+                ((EditText) view.findViewById(R.id.fileContent)).setTextColor(Color.GREEN);
+            } else if (colorPos == 2) {
+                ((EditText) view.findViewById(R.id.fileTitle)).setTextColor(Color.RED);
+                ((EditText) view.findViewById(R.id.fileContent)).setTextColor(Color.RED);
+            }
         }
     }
 
@@ -170,20 +195,6 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showDialog() {
-        AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
-        ad.setCancelable(false);
-        ad.setTitle("something");
-        ad.setMessage("somethingmessage");
-        ad.setButton(getActivity().getString(R.string.settingsMenu), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        ad.show();
     }
 
     @Override

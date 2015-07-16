@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Zadatak34</string>
+    <string name="hello_world">Ciao mondo!</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="noNotes">Non ci sono note attuali si prega di aggiungere un po per rivedere loro</string>
+    <string name="editNoteTitleTextView">Titolo</string>
+    <string name="editNoteContentTextView">Contenuto</string>
+    <string name="saveMenuItem">Salvare</string>
+    <string name="settingsMenu">impostazioni</string>
+    <string name="title_activity_edit_note">EditNoteActivity</string>
+    <string name="noteDetailsTextView">Ultima modifica:</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="textViewLanguageText">Lingua</string>
+    <string name="textViewColor">Colore</string>
+    <string-array name="language_list">
+        <item>Inglese</item>
+        <item>Croato</item>
+        <item>Italiano</item>
+    </string-array>
+    <string-array name="color_list">
+        <item name="blue">@string/blue</item>
+        <item name="green">@string/green</item>
+        <item name="red">@string/red</item>
+    </string-array>
+    <string name="blue">Blu</string>
+    <string name="green">Verde</string>
+    <string name="red">Rosso</string>
+</resources>

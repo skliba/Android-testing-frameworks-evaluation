@@ -14,7 +14,7 @@
         android:id="@+id/noteTitle"
         android:textSize="@dimen/listItemNoteTitleSize"
         android:textStyle="bold"
-        tools:text="testText"/>
+        tools:text="testText" />
 
     <TextView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         android:layout_weight="0.5"
         android:textSize="16sp"
         android:id="@+id/noteDetails"
-        android:text="@string/noteDetailsTextView"/>
+        android:text="@string/noteDetailsTextView" />
 
 
 </LinearLayout>

@@ -8,6 +8,6 @@
         android:id="@+id/settingsBtn"
         android:title="@string/settingsMenu"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_settings_white_24dp"/>
+        android:icon="@drawable/ic_settings_white_24dp" />
 
 </menu>

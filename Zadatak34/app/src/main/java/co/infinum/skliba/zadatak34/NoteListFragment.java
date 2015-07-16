@@ -141,7 +141,7 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
         startActivity(intent);
     }
 
-    public void updateList(){
+    public void updateList() {
         refreshView(getActivity().findViewById(R.id.root_view));
     }
 
