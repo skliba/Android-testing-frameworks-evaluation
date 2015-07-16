@@ -10,4 +10,17 @@
     <string name="settingsMenu">settings</string>
     <string name="title_activity_edit_note">EditNoteActivity</string>
     <string name="noteDetailsTextView">Last modified:</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="textViewLanguageText">Language</string>
+    <string name="textViewColor">Color</string>
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Croatian</item>
+        <item>Italian</item>
+    </string-array>
+    <string-array name="color_list">
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Red</item>
+    </string-array>
 </resources>

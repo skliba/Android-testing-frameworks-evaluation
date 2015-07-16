@@ -50,7 +50,6 @@ public class MainActivity extends ActionBarActivity {
                 if (fragmentName.equals("listFragment")) {
                     android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.containter, listNote);
-                    ft.addToBackStack(null);
                     ft.commit();
                 }
             }
@@ -70,8 +69,7 @@ public class MainActivity extends ActionBarActivity {
     private void clearBackStack() {
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         if (manager.getBackStackEntryCount() > 0) {
-            android.support.v4.app.FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
-            manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 

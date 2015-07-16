@@ -2,6 +2,7 @@ package co.infinum.skliba.zadatak34;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,7 +49,6 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         RelativeLayout rLayout = (RelativeLayout) view.findViewById(R.id.emptyScreen);
@@ -129,7 +129,8 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void handleSettingsButtonClick() {
-
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        startActivity(intent);
     }
 
     //Adapter
@@ -178,6 +179,7 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
                 PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(NOTE_TITLE, arrayList.get((int) fileTitle.getTag()).getFileName() + ".txt").apply();
                 ft.replace(R.id.containter, new EditNoteFragment());
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+                    clearBackStack();
                     ft.addToBackStack(null);
                 }
                 else{
@@ -194,8 +196,7 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
     private void clearBackStack() {
         android.support.v4.app.FragmentManager manager = getFragmentManager();
         if (manager.getBackStackEntryCount() > 0) {
-            android.support.v4.app.FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
-            manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 
