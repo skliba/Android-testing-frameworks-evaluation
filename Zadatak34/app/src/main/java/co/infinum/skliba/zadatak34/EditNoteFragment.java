@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,11 +31,11 @@ import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
  */
 public class EditNoteFragment extends android.support.v4.app.Fragment implements MenuClickHandler {
 
-    public static final String FRAGMENT_NAME = "FRAGMENT NAME";
-    public static final String NOTE_TITLE = "NOTE NAME";
-    public static final String DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles/";
-    public static final String CHANGES_OCCURRED = "CHANGES OCCURRED";
+    private static final String DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles/";
+    private static final String CHANGES_OCCURRED = "CHANGES OCCURRED";
+    private static final String FILE_CONTENT = "FILE_CONTENT";
     private boolean changes = false;
+    private String fileName;
     private EditText fileTitle;
     private EditText fileContent;
     private String content = "";
@@ -62,8 +60,21 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
     };
 
 
-    public EditNoteFragment() {
+    public static EditNoteFragment newInstance(String fileName) {
+        EditNoteFragment editNoteFragment = new EditNoteFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString(MainActivity.FILE_NAME, fileName);
+        editNoteFragment.setArguments(arguments);
+        return editNoteFragment;
+    }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey(MainActivity.FILE_NAME)) {
+            fileName = arguments.getString(MainActivity.FILE_NAME);
+        }
     }
 
     @Nullable
@@ -76,50 +87,41 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(FRAGMENT_NAME, "editFragment").commit();
         setHasOptionsMenu(true);
-
 
         fileTitle = (EditText) view.findViewById(R.id.fileTitle);
         fileContent = (EditText) view.findViewById(R.id.fileContent);
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(CHANGES_OCCURRED)) {
             changes = savedInstanceState.getBoolean(CHANGES_OCCURRED);
-        }
-
-        String fileNamewithExtension = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(NOTE_TITLE, "");
-
-        if (!fileNamewithExtension.isEmpty()) {
-            String fileNameWithoutExtension = fileNamewithExtension.substring(0, fileNamewithExtension.lastIndexOf("."));
-            fileTitle.setText(fileNameWithoutExtension);
-            if (isExternalStorageReadeable()) {
-                String path = DIRECTORY + fileNamewithExtension;
-
-                try {
-                    File file = new File(path);
-                    BufferedReader buffer = new BufferedReader(new FileReader(file));
-
-                    String line;
-
-                    while ((line = buffer.readLine()) != null) {
-                        content += line + "\n";
-                    }
-
-                    fileContent.setText(content);
-                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().clear().commit();
-
-                } catch (Exception e) {
-
-                }
+            if (changes) {
+                content = savedInstanceState.getString(FILE_CONTENT);
             }
         }
-    }
 
-    public void setFileContent(String fileContent) {
-        this.fileContent.setText(fileContent);
-    }
+        if (fileName != null && !fileName.isEmpty()) {
+            String fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf("."));
+            fileTitle.setText(fileNameWithoutExtension);
+            if (!changes) {
+                if (isExternalStorageReadeable()) {
+                    String path = DIRECTORY + fileName;
 
-    public void setFileTitle(String fileTitle) {
-        this.fileTitle.setText(fileTitle);
+                    try {
+                        File file = new File(path);
+                        BufferedReader buffer = new BufferedReader(new FileReader(file));
+
+                        String line;
+
+                        while ((line = buffer.readLine()) != null) {
+                            content += line + "\n";
+                        }
+
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+            fileContent.setText(content);
+        }
     }
 
     @Override
@@ -217,7 +219,7 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
     }
 
     private void refreshList() {
-        NoteListFragment fragment = (NoteListFragment) getActivity().getSupportFragmentManager().findFragmentByTag("listFragment");
+        NoteListFragment fragment = (NoteListFragment) getActivity().getSupportFragmentManager().findFragmentByTag(MainActivity.LIST_FRAGMENT_TAG);
         fragment.updateList();
     }
 
@@ -238,7 +240,14 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putBoolean(CHANGES_OCCURRED, changes);
+        if (changes) {
+            outState.putString(FILE_CONTENT, fileContent.getText().toString());
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

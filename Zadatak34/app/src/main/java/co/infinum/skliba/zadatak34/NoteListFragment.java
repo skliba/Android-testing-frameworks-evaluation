@@ -1,12 +1,11 @@
 package co.infinum.skliba.zadatak34;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,8 +30,6 @@ import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
  */
 public class NoteListFragment extends android.support.v4.app.Fragment implements MenuClickHandler {
 
-    public static final String FRAGMENT_NAME = "FRAGMENT NAME";
-    public static final String NOTE_TITLE = "NOTE NAME";
     private ArrayList<FileInfo> arrList;
 
     public NoteListFragment() {
@@ -42,14 +39,16 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.note_list, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.note_list, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        refreshView(view);
+    }
 
-
+    // izdvojio sam u posebnu metodu jer si dva puta imao isti kod i bio je prilicno velik komad
+    private void refreshView(View view) {
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         RelativeLayout rLayout = (RelativeLayout) view.findViewById(R.id.emptyScreen);
         RecyclerView listView = (RecyclerView) view.findViewById(R.id.listView);
@@ -60,13 +59,9 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
             @Override
             public void onClick(View v) {
                 android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.containter, new EditNoteFragment());
-                ft.addToBackStack(null);
-                ft.commit();
+                performFragmentTransaction(ft, EditNoteFragment.newInstance(null));
             }
         });
-
-        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(FRAGMENT_NAME, "listFragment").commit();
 
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles";
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles");
@@ -96,9 +91,18 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
                 listView.setAdapter(new RecyclerViewAdapter(getActivity().getApplicationContext(), arrList));
             }
         }
-
     }
 
+    private void performFragmentTransaction(FragmentTransaction ft, EditNoteFragment editNoteFragment) {
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            ft.replace(R.id.containter, editNoteFragment, MainActivity.EDIT_FRAGMENT_TAG);
+            ft.addToBackStack(null);
+        }
+        else{
+            ft.replace(R.id.landEdit, editNoteFragment, MainActivity.EDIT_FRAGMENT_TAG);
+        }
+        ft.commit();
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -130,6 +134,10 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
     @Override
     public void handleSettingsButtonClick() {
 
+    }
+
+    public void updateList(){
+        refreshView(getActivity().findViewById(R.id.root_view));
     }
 
     //Adapter
@@ -175,75 +183,8 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
             @Override
             public void onClick(View v) {
                 android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(NOTE_TITLE, arrayList.get((int) fileTitle.getTag()).getFileName() + ".txt").apply();
-                ft.replace(R.id.containter, new EditNoteFragment());
-                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-                    ft.addToBackStack(null);
-                }
-                else{
-                    clearBackStack();
-                }
-
-                ft.commit();
-            }
-        }
-
-    }
-
-
-    private void clearBackStack() {
-        android.support.v4.app.FragmentManager manager = getFragmentManager();
-        if (manager.getBackStackEntryCount() > 0) {
-            android.support.v4.app.FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
-            manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
-
-    public void updateList(){
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        RelativeLayout rLayout = (RelativeLayout) getActivity().findViewById(R.id.emptyScreen);
-        RecyclerView listView = (RecyclerView) getActivity().findViewById(R.id.listView);
-
-        arrList = new ArrayList<>();
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.containter, new EditNoteFragment());
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
-
-        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(FRAGMENT_NAME, "listFragment").commit();
-
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles";
-        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFiles");
-
-        if (dir.isDirectory()) {
-
-            if (dir.listFiles().length != 0) {
-
-                rLayout.setVisibility(View.GONE);
-                listView.setVisibility(View.VISIBLE);
-                try {
-
-                    File file = new File(path);
-                    File files[] = file.listFiles();
-                    String holder;
-                    for (int i = 0; i < files.length; i++) {
-                        holder = files[i].getName();
-                        Date dateChanged = new Date(files[i].lastModified());
-                        holder = holder.substring(0, holder.lastIndexOf("."));
-                        arrList.add(new FileInfo(holder, dateChanged));
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                listView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-                listView.setAdapter(new RecyclerViewAdapter(getActivity().getApplicationContext(), arrList));
+                EditNoteFragment editNoteFragment = EditNoteFragment.newInstance(arrayList.get((int) fileTitle.getTag()).getFileName() + ".txt");
+                performFragmentTransaction(ft, editNoteFragment);
             }
         }
     }

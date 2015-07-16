@@ -1,35 +1,18 @@
 package co.infinum.skliba.zadatak34;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.GradientDrawable;
-import android.os.PersistableBundle;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import com.melnykov.fab.FloatingActionButton;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    public static final String FRAGMENT_NAME = "FRAGMENT NAME";
+    public static final String LIST_FRAGMENT_TAG = "LIST_FRAGMENT_TAG";
+    public static final String EDIT_FRAGMENT_TAG = "EDIT_FRAGMENT_TAG";
+    public static final String FILE_NAME = "FILE_NAME";
 
 
     @Override
@@ -37,41 +20,44 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NoteListFragment listNote = new NoteListFragment();
+        // remove existing edit fragment because it may have been saved during onsaveinstancestate
+        EditNoteFragment  editNoteFragment = (EditNoteFragment) getSupportFragmentManager().findFragmentByTag(EDIT_FRAGMENT_TAG);
+        if (editNoteFragment != null) {
+            getSupportFragmentManager().beginTransaction().remove(editNoteFragment).commit();
+        }
+        String fileName = null;
+        if (savedInstanceState != null && savedInstanceState.containsKey(FILE_NAME)) {
+            fileName = savedInstanceState.getString(FILE_NAME);
+        }
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
-            if (savedInstanceState == null) {
-                android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.containter, new NoteListFragment());
-                ft.commit();
-            } else {
-                String fragmentName = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(FRAGMENT_NAME, "");
-                if (fragmentName.equals("listFragment")) {
-                    android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.containter, listNote);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                }
-            }
-        } else {
-            clearBackStack();
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.containter, new EditNoteFragment());
+            ft.replace(R.id.containter, new NoteListFragment(), LIST_FRAGMENT_TAG);
             ft.commit();
-            android.support.v4.app.FragmentTransaction _ft = getSupportFragmentManager().beginTransaction();
-            _ft.replace(R.id.landList, new NoteListFragment(), "listFragment");
-            _ft.commit();
+            // ako smo radili na nekom doumentu mijenjamo list fragment s edit fragmentom i stavljamo list na back stack
+            // inace normalno prikazujemo list fragment jer nema smisla pokazati prazan dokument
+            if (fileName != null) {
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.containter, EditNoteFragment.newInstance(fileName), EDIT_FRAGMENT_TAG);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
 
-
+        } else {
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.landList, new NoteListFragment(), LIST_FRAGMENT_TAG);
+            ft.commit();
+            ft.replace(R.id.landEdit, EditNoteFragment.newInstance(fileName), EDIT_FRAGMENT_TAG);
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.commit();
         }
     }
 
     private void clearBackStack() {
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         if (manager.getBackStackEntryCount() > 0) {
-            android.support.v4.app.FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
-            manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 
@@ -98,9 +84,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putString(FRAGMENT_NAME, "listFragment");
+    protected void onSaveInstanceState(Bundle outState) {
+        EditNoteFragment editNoteFragment = (EditNoteFragment) getSupportFragmentManager().findFragmentByTag(EDIT_FRAGMENT_TAG);
+        if (editNoteFragment != null) {
+            outState.putString(FILE_NAME, editNoteFragment.getFileName());
+        }
+        super.onSaveInstanceState(outState);
     }
-
 }

@@ -13,7 +13,7 @@
         android:layout_weight="0.5" />
 
     <FrameLayout
-        android:id="@+id/containter"
+        android:id="@+id/landEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5" />
