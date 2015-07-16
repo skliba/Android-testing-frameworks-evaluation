@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements MenuClickHandler,
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.containter, new NoteListFragment());
+                ft.commit();
             }
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.containter);
