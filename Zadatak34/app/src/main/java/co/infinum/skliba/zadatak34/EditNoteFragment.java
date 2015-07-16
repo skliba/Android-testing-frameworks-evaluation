@@ -151,7 +151,6 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
                 handleSaveButtonClick();
                 break;
             case R.id.settingsBtn:
-                handleSettingsButtonClick();
                 break;
         }
         return super.onOptionsItemSelected(item);

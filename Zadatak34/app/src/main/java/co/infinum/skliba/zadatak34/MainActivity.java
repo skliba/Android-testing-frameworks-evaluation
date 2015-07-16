@@ -26,8 +26,10 @@ import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
+import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements MenuClickHandler{
 
     public static final String FRAGMENT_NAME = "FRAGMENT NAME";
 
@@ -89,8 +91,8 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.settingsBtn) {
+            handleSettingsButtonClick();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -101,4 +103,14 @@ public class MainActivity extends ActionBarActivity {
         outState.putString(FRAGMENT_NAME, "listFragment");
     }
 
+    @Override
+    public void handleSaveButtonClick() {
+
+    }
+
+    @Override
+    public void handleSettingsButtonClick() {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
 }
