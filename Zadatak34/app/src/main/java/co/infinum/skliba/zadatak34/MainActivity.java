@@ -21,7 +21,6 @@ public class MainActivity extends ActionBarActivity implements MenuClickHandler 
     public static final String LIST_FRAGMENT_TAG = "LIST_FRAGMENT_TAG";
     public static final String EDIT_FRAGMENT_TAG = "EDIT_FRAGMENT_TAG";
     public static final String FILE_NAME = "FILE_NAME";
-    public static final String SELECTED_LANGUAGE = "SELECTED LANGUAGE";
     public static final String SELECTED_LANGUAGE_POSITION = "SELECTED LANGUAGE POSITION";
 
 
