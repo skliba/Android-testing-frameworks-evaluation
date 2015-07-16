@@ -1,6 +1,7 @@
 package co.infinum.skliba.zadatak34;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
@@ -44,6 +45,7 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         refreshView(view);
     }
 
@@ -133,7 +135,8 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void handleSettingsButtonClick() {
-
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        startActivity(intent);
     }
 
     public void updateList(){
@@ -187,5 +190,6 @@ public class NoteListFragment extends android.support.v4.app.Fragment implements
                 performFragmentTransaction(ft, editNoteFragment);
             }
         }
+
     }
 }

@@ -2,6 +2,7 @@ package co.infinum.skliba.zadatak34;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
@@ -152,7 +153,6 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
                 handleSaveButtonClick();
                 break;
             case R.id.settingsBtn:
-                handleSettingsButtonClick();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -235,7 +235,8 @@ public class EditNoteFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void handleSettingsButtonClick() {
-
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        startActivity(intent);
     }
 
     @Override

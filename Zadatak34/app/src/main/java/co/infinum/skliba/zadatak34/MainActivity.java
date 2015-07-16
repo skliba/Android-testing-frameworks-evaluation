@@ -1,14 +1,17 @@
 package co.infinum.skliba.zadatak34;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import co.infinum.skliba.zadatak34.interfaces.MenuClickHandler;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements MenuClickHandler{
 
     public static final String LIST_FRAGMENT_TAG = "LIST_FRAGMENT_TAG";
     public static final String EDIT_FRAGMENT_TAG = "EDIT_FRAGMENT_TAG";
@@ -20,11 +23,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // remove existing edit fragment because it may have been saved during onsaveinstancestate
-        EditNoteFragment  editNoteFragment = (EditNoteFragment) getSupportFragmentManager().findFragmentByTag(EDIT_FRAGMENT_TAG);
-        if (editNoteFragment != null) {
-            getSupportFragmentManager().beginTransaction().remove(editNoteFragment).commit();
-        }
         String fileName = null;
         if (savedInstanceState != null && savedInstanceState.containsKey(FILE_NAME)) {
             fileName = savedInstanceState.getString(FILE_NAME);
@@ -77,8 +75,8 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.settingsBtn) {
+            handleSettingsButtonClick();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -90,5 +88,16 @@ public class MainActivity extends ActionBarActivity {
             outState.putString(FILE_NAME, editNoteFragment.getFileName());
         }
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void handleSaveButtonClick() {
+
+    }
+
+    @Override
+    public void handleSettingsButtonClick() {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
