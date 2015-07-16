@@ -142,6 +142,7 @@ public class SettingsFragment extends Fragment implements MenuClickHandler {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putInt(SELECTED_LANGUAGE_POSITION, selectedLanguagePos).apply();
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putInt(SELECTED_COLOR_POSITION, selectedColorPos).apply();
         Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
