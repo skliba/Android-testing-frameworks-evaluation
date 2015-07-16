@@ -9,9 +9,10 @@
     tools:context="co.infinum.skliba.zadatak34.SettingsActivity">
 
     <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/Fragment"
         android:name="co.infinum.skliba.zadatak34.SettingsFragment"
-        tools:layout="@layout/settings_layout"
-        android:id="@+id/Fragment"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/settings_layout" />
+
 </LinearLayout>
