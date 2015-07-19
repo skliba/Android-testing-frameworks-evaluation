@@ -1,5 +1,6 @@
-package co.infinum.skliba.zadatak5.Login;
+package co.infinum.skliba.zadatak5.login;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -29,6 +30,8 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginPassword = (EditText) findViewById(R.id.loginPassword);

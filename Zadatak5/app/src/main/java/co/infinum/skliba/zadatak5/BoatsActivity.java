@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,6 +27,7 @@ public class BoatsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_boats);
 
         postList = (RecyclerView) findViewById(R.id.listView);
+        postList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");
 
@@ -34,14 +36,14 @@ public class BoatsActivity extends ActionBarActivity {
             public void success(BoatsResponse boatsResponse, Response response) {
                 adapter = new BoatsAdapter(BoatsActivity.this, boatsResponse.getRespose());
                 postList.setAdapter(adapter);
-                postList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                Log.e("SUCCESS", "BRAVO");
 
 
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Log.e("FAILED", error.toString());
             }
         });
 

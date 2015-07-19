@@ -1,6 +1,4 @@
-package co.infinum.skliba.zadatak5.Login;
-
-import com.google.gson.annotations.SerializedName;
+package co.infinum.skliba.zadatak5.login;
 
 import java.io.Serializable;
 

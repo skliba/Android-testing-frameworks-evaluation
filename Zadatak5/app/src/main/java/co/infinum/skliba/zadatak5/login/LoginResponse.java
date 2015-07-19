@@ -1,4 +1,4 @@
-package co.infinum.skliba.zadatak5.Login;
+package co.infinum.skliba.zadatak5.login;
 
 import co.infinum.skliba.zadatak5.UserModel;
 
