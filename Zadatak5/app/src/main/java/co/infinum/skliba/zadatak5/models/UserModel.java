@@ -1,4 +1,4 @@
-package co.infinum.skliba.zadatak5;
+package co.infinum.skliba.zadatak5.models;
 
 import android.widget.SectionIndexer;
 

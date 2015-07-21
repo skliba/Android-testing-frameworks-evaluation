@@ -1,14 +1,13 @@
-package co.infinum.skliba.zadatak5;
+package co.infinum.skliba.zadatak5.models;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
  * Created by noxqs on 18.07.15..
  */
-public class Post {
-
-    @SerializedName("id")
-    private static final int id = -1;
+public class Post implements Serializable{
 
     @SerializedName("title")
     public String title;

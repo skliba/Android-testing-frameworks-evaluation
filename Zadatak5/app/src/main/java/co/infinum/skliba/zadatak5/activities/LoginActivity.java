@@ -1,6 +1,5 @@
-package co.infinum.skliba.zadatak5.login;
+package co.infinum.skliba.zadatak5.activities;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -12,9 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import co.infinum.skliba.zadatak5.ApiManager;
-import co.infinum.skliba.zadatak5.BoatsActivity;
+import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.R;
+import co.infinum.skliba.zadatak5.login.LoginResponse;
+import co.infinum.skliba.zadatak5.login.User;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 

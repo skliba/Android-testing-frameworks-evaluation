@@ -1,14 +1,14 @@
-package co.infinum.skliba.zadatak5;
+package co.infinum.skliba.zadatak5.api;
 
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
 
+import co.infinum.skliba.zadatak5.interfaces.BoatsService;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;

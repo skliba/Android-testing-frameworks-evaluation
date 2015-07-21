@@ -2,12 +2,17 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorAccent">#ffffff</item>
         <item name="android:actionBarStyle">@style/myActionBar</item>
+        <item name="colorAccent">@android:color/white</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/myActionBar</item>
     </style>
-    
-    <style name="myActionBar">
-        <item name="android:background">#4A3CD7</item>
+
+    <style name="myActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/blue</item>
+        <!-- Support library compatibility -->
+        <item name="background">@color/blue</item>
     </style>
 
 </resources>

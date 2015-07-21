@@ -1,6 +1,7 @@
-package co.infinum.skliba.zadatak5;
+package co.infinum.skliba.zadatak5.interfaces;
 
 
+import co.infinum.skliba.zadatak5.models.BoatsResponse;
 import co.infinum.skliba.zadatak5.login.LoginResponse;
 import co.infinum.skliba.zadatak5.login.User;
 import retrofit.Callback;
