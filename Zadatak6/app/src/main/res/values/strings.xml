@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Zadatak5</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_boats">BoatsActivity</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="hintUsername">Username</string>
+    <string name="hintPassword">Password</string>
+    <string name="buttonLoginText">LOGIN</string>
+    <string name="BoatsActivityTitleActionBar">My Posts</string>
+    <string name="registerLoginLayout">Register</string>
+    <string name="dialogFirstName">First name</string>
+    <string name="dialogLastName">Last name</string>
+    <string name="dialogEmail">Email</string>
+    <string name="dialogPassword">Password</string>
+    <string name="dialogPasswordRepeat">Password repeat</string>
+    <string name="registerDialog">Register user</string>
+</resources>
