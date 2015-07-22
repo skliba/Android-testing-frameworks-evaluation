@@ -13,13 +13,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.api.ApiManager;
-import co.infinum.skliba.zadatak5.models.BodyUserData;
+import co.infinum.skliba.zadatak5.models.RegisterDataUser;
 import co.infinum.skliba.zadatak5.models.LoginResponse;
 import co.infinum.skliba.zadatak5.models.RegisterData;
 import retrofit.Callback;
@@ -35,7 +34,7 @@ public class UserDialog extends DialogFragment {
 
     private static final String USER_KEY = "user";
 
-    private BodyUserData bodyUserData;
+    private RegisterDataUser registerDataUser;
 
     private RegisterData registerData;
 
@@ -58,7 +57,7 @@ public class UserDialog extends DialogFragment {
         return newInstance(title, null);
     }
 
-    public static UserDialog newInstance(String title, BodyUserData userData) {
+    public static UserDialog newInstance(String title, RegisterDataUser userData) {
         UserDialog fragment = new UserDialog();
         fragment.setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_Alert);
         Bundle args = new Bundle();
@@ -83,7 +82,7 @@ public class UserDialog extends DialogFragment {
                 if (validateUserInput()) {
                     fillObjectWithData();
                     registerData = new RegisterData();
-                    registerData.setUser(bodyUserData);
+                    registerData.setUser(registerDataUser);
                     ApiManager.getService().register(registerData, new Callback<LoginResponse>() {
                         @Override
                         public void success(LoginResponse loginResponse, Response response) {
@@ -113,12 +112,12 @@ public class UserDialog extends DialogFragment {
     }
 
     private void fillObjectWithData() {
-        bodyUserData = new BodyUserData();
-        bodyUserData.setEmail(etEmail.getText().toString());
-        bodyUserData.setPassword(etPassword.getText().toString());
-        bodyUserData.setPasswordRepeat(etPasswordRepeat.getText().toString());
-        bodyUserData.setFirstName(etFirstName.getText().toString());
-        bodyUserData.setLastName(etLastName.getText().toString());
+        registerDataUser = new RegisterDataUser();
+        registerDataUser.setEmail(etEmail.getText().toString());
+        registerDataUser.setPassword(etPassword.getText().toString());
+        registerDataUser.setPasswordRepeat(etPasswordRepeat.getText().toString());
+        registerDataUser.setFirstName(etFirstName.getText().toString());
+        registerDataUser.setLastName(etLastName.getText().toString());
     }
 
     private boolean validateUserInput() {

@@ -3,7 +3,7 @@ package co.infinum.skliba.zadatak5.interfaces;
 
 import co.infinum.skliba.zadatak5.models.BoatsResponse;
 import co.infinum.skliba.zadatak5.models.LoginResponse;
-import co.infinum.skliba.zadatak5.models.BodyUserData;
+import co.infinum.skliba.zadatak5.models.RegisterDataUser;
 import co.infinum.skliba.zadatak5.models.RegisterData;
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -17,7 +17,7 @@ import retrofit.http.Query;
 public interface BoatsService {
 
     @POST("/api/v1/users/login")
-    void login (@Body BodyUserData user, Callback<LoginResponse> callback);
+    void login (@Body RegisterDataUser user, Callback<LoginResponse> callback);
 
     @GET("/api/v1/posts")
     void getAllBoats(@Query("token") String token,

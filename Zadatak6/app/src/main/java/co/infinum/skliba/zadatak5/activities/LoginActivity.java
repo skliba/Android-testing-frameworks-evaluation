@@ -16,7 +16,7 @@ import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.adapters.UserDialog;
 import co.infinum.skliba.zadatak5.models.LoginResponse;
-import co.infinum.skliba.zadatak5.models.BodyUserData;
+import co.infinum.skliba.zadatak5.models.RegisterDataUser;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TOKEN = "TOKEN";
     public static final String USER_DIALOG = "user-dialog";
 
-    private BodyUserData user;
+    private RegisterDataUser user;
 
     @Bind(R.id.btnRegister)
     Button btnRegister;
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkCredentials() {
-        user = new BodyUserData();
+        user = new RegisterDataUser();
         user.setEmail(loginUsername.getText().toString());
         user.setPassword(loginPassword.getText().toString());
         ApiManager.getService().login(user, new Callback<LoginResponse>() {

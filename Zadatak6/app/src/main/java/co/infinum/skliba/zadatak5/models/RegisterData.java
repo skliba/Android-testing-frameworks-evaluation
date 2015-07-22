@@ -10,9 +10,9 @@ import java.io.Serializable;
 public class RegisterData implements Serializable{
 
     @SerializedName("user")
-    public BodyUserData user;
+    public RegisterDataUser user;
 
-    public void setUser(BodyUserData user) {
+    public void setUser(RegisterDataUser user) {
         this.user = user;
     }
 }

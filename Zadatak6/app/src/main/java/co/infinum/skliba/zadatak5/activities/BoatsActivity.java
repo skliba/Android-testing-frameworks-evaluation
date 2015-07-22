@@ -61,13 +61,11 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
             adapter = new BoatsAdapter(this, ((ArrayList<Post>) savedInstanceState.getSerializable(ARRAY_LIST)), this);
             postList.setAdapter(adapter);
         } else {
-            if (checkIfConnectionExists()) fetchData();
-            else {
-                adapter = new BoatsAdapter(this, (ArrayList<Post>) posts.getPosts(), this);
-                postList.setAdapter(adapter);
+             fetchData();
+
             }
         }
-    }
+
 
     private boolean checkIfConnectionExists() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -83,16 +81,16 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
                 postList.setAdapter(adapter);
                 Log.e("SUCCESS", "BRAVO");
 
-                posts.dropAllPosts();
-                ArrayList<Post> post = boatsResponse.getRespose();
-                for (int i = 0; i < post.size(); i++) {
-                    posts.addPost(post.get(i));
-                }
+//                posts.dropAllPosts();
+//                ArrayList<Post> post = boatsResponse.getRespose();
+//                for (int i = 0; i < post.size(); i++) {
+//                    posts.addPost(post.get(i));
+//                }
 
             }
             @Override
             public void failure(RetrofitError error) {
-                Log.e("FAILED", error.getMessage());
+                Log.e("FAILED", "" + error.getMessage());
             }
         });
     }

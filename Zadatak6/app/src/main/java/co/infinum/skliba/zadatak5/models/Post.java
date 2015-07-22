@@ -21,9 +21,11 @@ public class Post extends BaseModel implements Serializable{
     @Column
     public long id;
 
+    @Column
     @SerializedName("title")
     public String title;
 
+    @Column
     @SerializedName("image_url")
     public String imageUrl;
 
