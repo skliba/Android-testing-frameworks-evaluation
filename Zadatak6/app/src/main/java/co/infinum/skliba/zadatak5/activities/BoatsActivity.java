@@ -6,21 +6,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.net.ConnectivityManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
-import co.infinum.skliba.zadatak5.SimpleDividerItemDecoration;
 import co.infinum.skliba.zadatak5.adapters.BoatsAdapter;
 import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.api.DbFlowPosts;
@@ -51,7 +48,6 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
         setContentView(R.layout.activity_boats);
         ButterKnife.bind(this);
 
-        postList.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
         postList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");

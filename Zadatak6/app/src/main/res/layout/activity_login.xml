@@ -39,11 +39,11 @@
 
                     <EditText
                         android:id="@+id/loginUsername"
+                        style="@style/LoginInput"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
-                        android:hint="@string/hintUsername"
-                        style="@style/LoginInput" />
+                        android:hint="@string/hintUsername" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -53,26 +53,22 @@
 
                     <EditText
                         android:id="@+id/loginPassword"
+                        style="@style/LoginInput"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/hintPassword"
-                        style="@style/LoginInput"
                         android:inputType="textPassword" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/loginButton"
+                    style="@style/Button.Login"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
-                    android:background="#0D0093"
-                    android:text="@string/buttonLoginText"
-                    style="@style/Button.Login"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
+                    android:text="@string/buttonLoginText" />
 
             </LinearLayout>
 
@@ -81,7 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-
                 android:background="@android:color/transparent"
                 android:text="@string/registerLoginLayout"
                 android:textColor="@android:color/white"
