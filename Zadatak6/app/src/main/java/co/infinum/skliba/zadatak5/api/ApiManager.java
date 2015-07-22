@@ -2,7 +2,11 @@ package co.infinum.skliba.zadatak5.api;
 
 import android.util.Log;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.net.CookieHandler;
@@ -22,6 +26,18 @@ public class ApiManager {
 
     public static final String API_ENDPOINT = "https://boatit.infinum.co";
 
+    private static final Gson GSON = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipField(FieldAttributes f) {
+            return f.getDeclaredClass().equals(ModelAdapter.class);
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+    }).create();
+
     private static final CookieHandler COOKIE_HANDLER = new CookieManager();
 
     private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient().setCookieHandler(COOKIE_HANDLER);
@@ -38,7 +54,7 @@ public class ApiManager {
             .setLog(LOG)
             .setClient(new OkClient(OK_HTTP_CLIENT))
             .setEndpoint(API_ENDPOINT)
-            .setConverter(new GsonConverter(new Gson()))
+            .setConverter(new GsonConverter(GSON))
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .build();
 

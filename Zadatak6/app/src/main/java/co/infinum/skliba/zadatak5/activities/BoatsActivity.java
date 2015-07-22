@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,10 +62,17 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
             adapter = new BoatsAdapter(this, ((ArrayList<Post>) savedInstanceState.getSerializable(ARRAY_LIST)), this);
             postList.setAdapter(adapter);
         } else {
-             fetchData();
+            if (checkIfConnectionExists()){
+                posts.dropAllPosts();
+                fetchData();
 
             }
+            else {
+                adapter = new BoatsAdapter(this, (ArrayList<Post>) posts.getPosts(), this);
+                postList.setAdapter(adapter);
+            }
         }
+    }
 
 
     private boolean checkIfConnectionExists() {
@@ -77,19 +85,22 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
         ApiManager.getService().getAllBoats(token, new Callback<BoatsResponse>() {
             @Override
             public void success(BoatsResponse boatsResponse, Response response) {
+
+                posts.dropAllPosts();
                 adapter = new BoatsAdapter(BoatsActivity.this, boatsResponse.getRespose(), BoatsActivity.this);
                 postList.setAdapter(adapter);
                 Log.e("SUCCESS", "BRAVO");
 
-//                posts.dropAllPosts();
-//                ArrayList<Post> post = boatsResponse.getRespose();
-//                for (int i = 0; i < post.size(); i++) {
-//                    posts.addPost(post.get(i));
-//                }
+                ArrayList<Post> post = boatsResponse.getRespose();
+                for (int i = 0; i < post.size(); i++) {
+                    posts.addPost(post.get(i));
+                }
 
             }
+
             @Override
             public void failure(RetrofitError error) {
+
                 Log.e("FAILED", "" + error.getMessage());
             }
         });

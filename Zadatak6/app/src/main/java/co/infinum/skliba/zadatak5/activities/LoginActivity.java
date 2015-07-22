@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,7 +79,10 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("YOUFAILED", error.toString());
+                if(error.getMessage().contains("404")){
+                    Toast.makeText(getApplicationContext(), "Wrong username and password", Toast.LENGTH_LONG).show();
+                }
+                Log.e("YOUFAILED", error.getMessage());
             }
         });
     }

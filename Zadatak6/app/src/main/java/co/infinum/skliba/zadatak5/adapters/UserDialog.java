@@ -1,7 +1,9 @@
 package co.infinum.skliba.zadatak5.adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -36,7 +38,9 @@ public class UserDialog extends DialogFragment {
 
     private RegisterDataUser registerDataUser;
 
-    private RegisterData registerData;
+    private Context context;
+
+    private static RegisterData registerData;
 
     @Bind(R.id.et_first_name)
     EditText etFirstName;
@@ -52,6 +56,12 @@ public class UserDialog extends DialogFragment {
 
     @Bind(R.id.et_password_repeat)
     EditText etPasswordRepeat;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity;
+    }
 
     public static UserDialog newInstance(String title) {
         return newInstance(title, null);
@@ -86,7 +96,7 @@ public class UserDialog extends DialogFragment {
                     ApiManager.getService().register(registerData, new Callback<LoginResponse>() {
                         @Override
                         public void success(LoginResponse loginResponse, Response response) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Register successful, you may log in with your new info", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Register successful, you may log in with your new info", Toast.LENGTH_LONG).show();
                         }
 
                         @Override

@@ -18,11 +18,10 @@
 
             <ImageView
                 android:id="@+id/ic_logo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/ic_logo" />
 
             <LinearLayout
@@ -33,23 +32,34 @@
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/loginUsername"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:hint="@string/hintUsername"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white" />
 
-                <EditText
-                    android:id="@+id/loginPassword"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hintPassword"
-                    android:inputType="textPassword"
-                    android:textColor="#ffffff"
-                    android:textColorHint="@android:color/white" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/loginUsername"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="@string/hintUsername"
+                        style="@style/LoginInput" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/loginPassword"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hintPassword"
+                        style="@style/LoginInput"
+                        android:inputType="textPassword" />
+
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/loginButton"
@@ -59,6 +69,7 @@
                     android:layout_marginTop="30dp"
                     android:background="#0D0093"
                     android:text="@string/buttonLoginText"
+                    style="@style/Button.Login"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
@@ -70,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+
                 android:background="@android:color/transparent"
                 android:text="@string/registerLoginLayout"
                 android:textColor="@android:color/white"

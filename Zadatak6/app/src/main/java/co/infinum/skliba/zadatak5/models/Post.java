@@ -17,7 +17,7 @@ import co.infinum.skliba.zadatak5.api.PostsDatabase;
 @Table(databaseName = PostsDatabase.NAME)
 public class Post extends BaseModel implements Serializable{
 
-    @PrimaryKey(autoincrement = true)
+    @PrimaryKey
     @Column
     public long id;
 

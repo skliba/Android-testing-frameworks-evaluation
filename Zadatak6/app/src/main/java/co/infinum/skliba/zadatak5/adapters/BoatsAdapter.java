@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class BoatsAdapter extends RecyclerView.Adapter<BoatsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(arrList.get(position).title);
-        Glide.with(context).load(arrList.get(position).imageUrl).into(holder.picture);
+        Glide.with(context).load(arrList.get(position).imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.picture);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

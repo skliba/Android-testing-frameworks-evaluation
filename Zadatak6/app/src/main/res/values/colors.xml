@@ -3,4 +3,7 @@
 
     <color name="blue">#4A3CD7</color>
 
+    <color name="login_button_normal">#283EB6</color>
+    <color name="login_button_pressed">#213282</color>
+
 </resources>

@@ -23,4 +23,20 @@
         <item name="background">@color/blue</item>
     </style>
 
+    <style name="LoginInput">
+        <item name="android:textSize">@dimen/text_size_standard</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:padding">@dimen/small_spacing</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
+    </style>
+    <style name="Button.Login">
+        <item name="android:background">@drawable/login_button</item>
+    </style>
+
 </resources>
