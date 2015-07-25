@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="blue">#4A3CD7</color>
+
+    <color name="login_button_normal">#283EB6</color>
+    <color name="login_button_pressed">#213282</color>
+    <color name="grey">#EAEAEA</color>
+    <color name="white">#ffffff</color>
+
+</resources>
