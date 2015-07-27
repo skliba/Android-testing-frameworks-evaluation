@@ -14,4 +14,12 @@ public class CommentAuthor implements Serializable {
 
     @SerializedName("last_name")
     public String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }

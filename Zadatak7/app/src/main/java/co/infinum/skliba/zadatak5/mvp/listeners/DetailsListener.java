@@ -1,5 +1,6 @@
 package co.infinum.skliba.zadatak5.mvp.listeners;
 
+import co.infinum.skliba.zadatak5.models.CommentsResponse;
 import co.infinum.skliba.zadatak5.models.Post;
 
 /**
@@ -8,6 +9,8 @@ import co.infinum.skliba.zadatak5.models.Post;
 public interface DetailsListener {
 
     void onDetailsRecieved(Post post);
+
+    void onCommentsRecieved(CommentsResponse response);
 
     void onTokenExpired();
 

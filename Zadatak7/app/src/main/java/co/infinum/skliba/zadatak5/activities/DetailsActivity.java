@@ -3,11 +3,13 @@ package co.infinum.skliba.zadatak5.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,11 +17,17 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.adapters.CommentsAdapter;
+import co.infinum.skliba.zadatak5.helpers.MvpFactory;
+import co.infinum.skliba.zadatak5.models.CommentsResponse;
+import co.infinum.skliba.zadatak5.models.CommentsResponseBody;
 import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.mvp.presenter.DetailsPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.DetailsView;
 
 
@@ -37,6 +45,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     private CommentsAdapter commentsAdapter;
     private Post post;
 
+    private DetailsPresenter presenter;
+    private String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +60,24 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
         post = intent.getParcelableExtra(BOAT_INFO);
         Glide.with(this).load(post.imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(detailsPicture);
 
-        commentListView.setHasFixedSize(true);
-        commentsAdapter = new CommentsAdapter(post.commentArrayList, this);
-        commentListView.setAdapter(commentsAdapter);
+        token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("TOKEN", "");
+
+        presenter = MvpFactory.getPresenter(this);
+        presenter.getCommentsPerPost(post, token);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(post.title);
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("RESTARTER", "RESTARTED");
+        
+        presenter = MvpFactory.getPresenter(this);
+        presenter.getCommentsPerPost(post, token);
     }
 
     @Override
@@ -98,6 +119,12 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     @Override
     public void onTokenExpired() {
 
+    }
+
+    @Override
+    public void onCommentsRecieved(ArrayList<CommentsResponseBody> response) {
+        commentsAdapter = new CommentsAdapter(response, this);
+        commentListView.setAdapter(commentsAdapter);
     }
 
 

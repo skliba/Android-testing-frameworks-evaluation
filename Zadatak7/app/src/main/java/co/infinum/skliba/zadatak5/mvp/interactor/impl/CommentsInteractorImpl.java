@@ -3,8 +3,8 @@ package co.infinum.skliba.zadatak5.mvp.interactor.impl;
 import android.util.Log;
 
 import co.infinum.skliba.zadatak5.api.PostsApplication;
-import co.infinum.skliba.zadatak5.models.CommentBody;
-import co.infinum.skliba.zadatak5.models.CommentBodyContent;
+import co.infinum.skliba.zadatak5.models.CreateCommentBody;
+import co.infinum.skliba.zadatak5.models.CreateCommentBodyContent;
 import co.infinum.skliba.zadatak5.models.CreateCommentResponse;
 import co.infinum.skliba.zadatak5.mvp.interactor.CommentsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.CommentsListener;
@@ -18,8 +18,8 @@ import retrofit.client.Response;
 public class CommentsInteractorImpl implements CommentsInteractor {
 
     private CommentsListener listener;
-    private CommentBody commentBody;
-    private CommentBodyContent commentBodyContent;
+    private CreateCommentBody commentBody;
+    private CreateCommentBodyContent commentBodyContent;
 
     @Override
     public void getComments(String post_id, String token) {
@@ -30,8 +30,8 @@ public class CommentsInteractorImpl implements CommentsInteractor {
     public void addComment(CommentsListener listener, String post_id, String token, String content) {
         this.listener = listener;
         Log.e("CommentsInteractorImpl", "add comment metoda i dalje");
-        commentBody = new CommentBody();
-        commentBodyContent = new CommentBodyContent();
+        commentBody = new CreateCommentBody();
+        commentBodyContent = new CreateCommentBodyContent();
         commentBodyContent.content = content;
 
         commentBody.setComment(commentBodyContent);

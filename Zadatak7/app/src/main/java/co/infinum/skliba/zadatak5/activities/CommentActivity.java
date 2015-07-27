@@ -43,8 +43,6 @@ public class CommentActivity extends AppCompatActivity implements CommentsView {
 
         token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");
 
-
-
         presenter = MvpFactory.getPresenter(this);
     }
 

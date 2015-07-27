@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import co.infinum.skliba.zadatak5.R;
+import co.infinum.skliba.zadatak5.models.CommentsResponse;
+import co.infinum.skliba.zadatak5.models.CommentsResponseBody;
 import co.infinum.skliba.zadatak5.models.UserComment;
 
 /**
@@ -17,10 +19,10 @@ import co.infinum.skliba.zadatak5.models.UserComment;
  */
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder> {
 
-    private ArrayList<UserComment> userComments;
+    private ArrayList<CommentsResponseBody> userComments;
     private Context context;
 
-    public CommentsAdapter(ArrayList<UserComment> userComments, Context context) {
+    public CommentsAdapter(ArrayList<CommentsResponseBody> userComments, Context context) {
         this.userComments = userComments;
         this.context = context;
     }
@@ -33,8 +35,11 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     @Override
     public void onBindViewHolder(CommentsViewHolder holder, int position) {
-        holder.commentAuthor.setText(userComments.get(position).author.firstName + " " + userComments.get(position).author.lastName);
-        holder.commentContent.setText(userComments.get(position).content);
+        holder.commentAuthor.setText(userComments.get(position).getAuthor().getFirstName()
+                + " "
+                + userComments.get(position).author.getLastName());
+
+        holder.commentContent.setText(userComments.get(position).getContent());
     }
 
     @Override

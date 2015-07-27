@@ -1,6 +1,7 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
 import co.infinum.skliba.zadatak5.R;
+import co.infinum.skliba.zadatak5.models.CommentsResponse;
 import co.infinum.skliba.zadatak5.models.Post;
 import co.infinum.skliba.zadatak5.mvp.interactor.DetailsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.DetailsListener;
@@ -26,10 +27,21 @@ public class DetailsPresenterImpl implements DetailsPresenter {
         detailsInteractor.getDetails(listener);
     }
 
+    @Override
+    public void getCommentsPerPost(Post post, String token) {
+        detailsInteractor.getComments(listener, post, token);
+    }
+
     private DetailsListener listener = new DetailsListener() {
         @Override
         public void onDetailsRecieved(Post post) {
             view.onDetailsRecieved(post);
+        }
+
+        @Override
+        public void onCommentsRecieved(CommentsResponse response) {
+            view.onCommentsRecieved(response.getResponse());
+
         }
 
         @Override

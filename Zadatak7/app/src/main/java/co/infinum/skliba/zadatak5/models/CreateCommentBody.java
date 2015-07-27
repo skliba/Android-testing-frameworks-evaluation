@@ -7,12 +7,12 @@ import java.io.Serializable;
 /**
  * Created by noxqs on 27.07.15..
  */
-public class CommentBody implements Serializable{
+public class CreateCommentBody implements Serializable{
 
     @SerializedName("comment")
-    public CommentBodyContent comment;
+    public CreateCommentBodyContent comment;
 
-    public void setComment(CommentBodyContent comment) {
+    public void setComment(CreateCommentBodyContent comment) {
         this.comment = comment;
     }
 }

@@ -1,18 +1,15 @@
 package co.infinum.skliba.zadatak5.interfaces;
 
 
-import com.squareup.okhttp.Call;
-
 import co.infinum.skliba.zadatak5.models.BoatsResponse;
-import co.infinum.skliba.zadatak5.models.CommentBody;
-import co.infinum.skliba.zadatak5.models.CommentBodyContent;
+import co.infinum.skliba.zadatak5.models.CommentsResponse;
+import co.infinum.skliba.zadatak5.models.CreateCommentBody;
 import co.infinum.skliba.zadatak5.models.CreateCommentResponse;
 import co.infinum.skliba.zadatak5.models.LoginResponse;
 import co.infinum.skliba.zadatak5.models.RegisterDataUser;
 import co.infinum.skliba.zadatak5.models.RegisterData;
 import retrofit.Callback;
 import retrofit.http.Body;
-import retrofit.http.Field;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -34,5 +31,8 @@ public interface BoatsService {
     void register(@Body RegisterData user, Callback<LoginResponse> callback);
 
     @POST("/api/v1/posts/{post_id}/comments")
-    void createAComment(@Path("post_id") String postId, @Query("token") String token, @Body CommentBody commentBody, Callback<CreateCommentResponse> callBack);
+    void createAComment(@Path("post_id") String postId, @Query("token") String token, @Body CreateCommentBody commentBody, Callback<CreateCommentResponse> callBack);
+
+    @GET("/api/v1/posts/{post_id}/comments")
+    void getAllComments(@Path("post_id") String postId, @Query("token") String token, Callback<CommentsResponse> callback);
 }

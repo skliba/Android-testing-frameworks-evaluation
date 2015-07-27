@@ -9,6 +9,8 @@ public interface DetailsPresenter {
 
     void getDetails(Post post);
 
+    void getCommentsPerPost(Post post, String token);
+
     void onUpboatClicked();
 
     void onDownboatClicked();

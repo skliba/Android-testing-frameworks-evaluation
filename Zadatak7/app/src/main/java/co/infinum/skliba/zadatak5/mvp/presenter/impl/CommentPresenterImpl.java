@@ -2,11 +2,8 @@ package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
 import android.util.Log;
 
-import co.infinum.skliba.zadatak5.helpers.SharedPrefsHelper;
-import co.infinum.skliba.zadatak5.models.CommentBody;
 import co.infinum.skliba.zadatak5.models.Post;
 import co.infinum.skliba.zadatak5.mvp.interactor.CommentsInteractor;
-import co.infinum.skliba.zadatak5.mvp.interactor.DetailsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.CommentsListener;
 import co.infinum.skliba.zadatak5.mvp.presenter.CommentPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.CommentsView;
