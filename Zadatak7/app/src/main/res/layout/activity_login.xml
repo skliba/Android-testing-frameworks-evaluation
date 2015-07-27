@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/loginUsername"
+                        android:id="@+id/login_username"
                         style="@style/LoginInput"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/loginPassword"
+                        android:id="@+id/login_password"
                         style="@style/LoginInput"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
-                    android:id="@+id/loginButton"
+                    android:id="@+id/login_button"
                     style="@style/Button.Login"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnRegister"
+                android:id="@+id/btn_register"
                 style="@style/Button.Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

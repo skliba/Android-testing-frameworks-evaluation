@@ -2,28 +2,39 @@ package co.infinum.skliba.zadatak5.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
+import co.infinum.skliba.zadatak5.adapters.CommentsAdapter;
 import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.mvp.view.DetailsView;
 
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements DetailsView {
 
     public static final String BOAT_INFO = "BOAT INFO";
     public static final String POST_DETAILS = "POST DETAILS";
 
-    @Bind(R.id.DetailsPicture)
+    @Bind(R.id.details_picture)
     ImageView detailsPicture;
 
+    @Bind(R.id.comment_list_view)
+    RecyclerView commentListView;
+
+    private CommentsAdapter commentsAdapter;
     private Post post;
 
     @Override
@@ -32,9 +43,15 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
 
+        commentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         Intent intent = getIntent();
-        post = ((Post) intent.getSerializableExtra(BOAT_INFO));
-        Glide.with(this).load(post.imageUrl).into(detailsPicture);
+        post = intent.getParcelableExtra(BOAT_INFO);
+        Glide.with(this).load(post.imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(detailsPicture);
+
+        commentListView.setHasFixedSize(true);
+        commentsAdapter = new CommentsAdapter(post.commentArrayList, this);
+        commentListView.setAdapter(commentsAdapter);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -45,7 +62,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(POST_DETAILS, post);
+        outState.putParcelable(POST_DETAILS, post);
     }
 
     @Override
@@ -63,10 +80,29 @@ public class DetailsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.add_new_post) {
+            Intent intent = new Intent(DetailsActivity.this, CommentActivity.class);
+            intent.putExtra(BOAT_INFO, (Parcelable) post);
+            startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDetailsRecieved(Post post) {
+
+    }
+
+    @Override
+    public void onTokenExpired() {
+
+    }
+
+
+    @Override
+    public void showError(@StringRes int error) {
+
     }
 }

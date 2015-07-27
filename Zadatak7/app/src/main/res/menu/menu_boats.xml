@@ -9,7 +9,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/addNewPost"
+        android:id="@+id/add_new_post"
         android:title="addNewPost"
         app:showAsAction="always"
         android:icon="@drawable/ic_add_white_24dp"/>

@@ -20,12 +20,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.api.ApiManager;
+import co.infinum.skliba.zadatak5.models.ErrorResponse;
 import co.infinum.skliba.zadatak5.models.RegisterDataUser;
 import co.infinum.skliba.zadatak5.models.LoginResponse;
 import co.infinum.skliba.zadatak5.models.RegisterData;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 /**
  * Created by noxqs on 22.07.15..
@@ -35,6 +37,7 @@ public class UserDialog extends DialogFragment {
     private static final String TITLE_KEY = "title";
 
     private static final String USER_KEY = "user";
+    public static final String FAILED = "FAILED";
 
     private RegisterDataUser registerDataUser;
 
@@ -96,16 +99,35 @@ public class UserDialog extends DialogFragment {
                     ApiManager.getService().register(registerData, new Callback<LoginResponse>() {
                         @Override
                         public void success(LoginResponse loginResponse, Response response) {
-                            Toast.makeText(context, "Register successful, you may log in with your new info", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, context.getString(R.string.RegisterSuccessful), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Log.e("FAILED", registerData.toString());
-                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                            String json = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+                            Log.e(FAILED, json);
+                            ErrorResponse er = new Gson().fromJson(json, ErrorResponse.class);
+                            if ((er.getErrorMsg().getErrorEmail() != null) &&
+                                    (er.getErrorMsg().getErrorPassword() != null)) {
 
-                            Log.e("FAILED", gson.toJson(registerData));
-                            Log.e("FAILED", error.getMessage());
+                                Toast.makeText(context, context.getString(R.string.registerErrorFailure)
+                                        + er.getErrorMsg().getErrorEmail().toString()
+                                        + "\n"
+                                        + context.getString(R.string.registerErrorPassword)
+                                        + er.getErrorMsg().getErrorPassword().toString(), Toast.LENGTH_LONG).show();
+
+                            } else if (er.getErrorMsg().getErrorEmail() == null && er.getErrorMsg().getErrorPassword() != null) {
+
+                                Toast.makeText(context, context.getString(R.string.registerErrorPassword)
+                                        + er.getErrorMsg().getErrorPassword().toString(), Toast.LENGTH_LONG).show();
+
+                            } else if (er.getErrorMsg().getErrorEmail() != null && er.getErrorMsg().getErrorPassword() == null) {
+
+
+                                Toast.makeText(context, context.getString(R.string.registerErrorFailure)
+                                        + er.getErrorMsg().getErrorEmail().toString(), Toast.LENGTH_LONG).show();
+                            }
+
                         }
                     });
                 }
@@ -134,10 +156,9 @@ public class UserDialog extends DialogFragment {
 
         if (!(etFirstName.getText().toString().isEmpty() || etLastName.getText().toString().isEmpty() ||
                 etEmail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty() || etPasswordRepeat.getText().toString().isEmpty())) {
-            if(etPassword.getText().toString().equals(etPasswordRepeat.getText().toString())){
+            if (etPassword.getText().toString().equals(etPasswordRepeat.getText().toString())) {
                 return true;
-            }
-            else{
+            } else {
                 Toast.makeText(getActivity().getApplicationContext(), "Password and retyped password do not match", Toast.LENGTH_LONG).show();
             }
         }

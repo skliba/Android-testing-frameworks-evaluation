@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ import co.infinum.skliba.zadatak5.models.Post;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 
 public class BoatsActivity extends AppCompatActivity implements BoatsClickListener {
@@ -35,12 +37,13 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
     public static final String ARRAY_LIST = "ARRAY LIST";
     public static final String BOAT_INFO = "BOAT INFO";
 
-    @Bind(R.id.listView)
+    @Bind(R.id.list_view)
     RecyclerView postList;
 
     private String token;
     private BoatsAdapter adapter;
     private DbFlowPosts posts;
+    private Post post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +108,7 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
     @Override
     public void onBoatsClick(Post post) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(BOAT_INFO, post);
+        intent.putExtra(BOAT_INFO, (Parcelable) post);
         startActivity(intent);
     }
 

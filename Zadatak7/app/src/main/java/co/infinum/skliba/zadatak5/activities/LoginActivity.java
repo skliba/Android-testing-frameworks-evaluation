@@ -1,7 +1,6 @@
 package co.infinum.skliba.zadatak5.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,19 +27,20 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String TOKEN = "TOKEN";
     public static final String USER_DIALOG = "user-dialog";
+    public static final String YOUFAILED = "YOUFAILED";
 
     private RegisterDataUser user;
 
-    @Bind(R.id.btnRegister)
+    @Bind(R.id.btn_register)
     Button btnRegister;
 
-    @Bind(R.id.loginUsername)
+    @Bind(R.id.login_username)
     EditText loginUsername;
 
-    @Bind(R.id.loginPassword)
+    @Bind(R.id.login_password)
     EditText loginPassword;
 
-    @Bind(R.id.loginButton)
+    @Bind(R.id.login_button)
     Button loginButton;
 
     @Override
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.btnRegister)
+    @OnClick(R.id.btn_register)
     public void onRegisterClick(){
         UserDialog.newInstance(getString(R.string.registerDialog))
                 .show(getSupportFragmentManager(), USER_DIALOG);
@@ -81,9 +81,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void failure(RetrofitError error) {
                 if(error.getMessage().contains("404")){
-                    Toast.makeText(getApplicationContext(), "Wrong username and password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.WrongUserNameAndPassword), Toast.LENGTH_LONG).show();
                 }
-                Log.e("YOUFAILED", error.getMessage());
+                Log.e(YOUFAILED, error.getMessage());
             }
         });
     }
