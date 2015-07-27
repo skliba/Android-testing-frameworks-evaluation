@@ -86,7 +86,7 @@ public class CommentActivity extends AppCompatActivity implements CommentsView {
 
     @Override
     public void onCommentCreated() {
-        Toast.makeText(getApplicationContext(), "super", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Comment added", Toast.LENGTH_SHORT).show();
     }
 
     @Override

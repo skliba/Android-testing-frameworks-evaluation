@@ -21,18 +21,13 @@ import co.infinum.skliba.zadatak5.api.PostsDatabase;
  */
 
 @Table(databaseName = PostsDatabase.NAME)
-public class Post extends BaseModel implements Parcelable, Serializable{
+public class Post extends BaseModel implements Parcelable, Serializable {
 
     @PrimaryKey
     @Column
     public long id;
-//
-//   public ArrayList<UserComment> getCommentArrayList() {
-//        return commentArrayList;
-//    }
 
     @Column
-
     @SerializedName("title")
     public String title;
 
@@ -42,9 +37,6 @@ public class Post extends BaseModel implements Parcelable, Serializable{
 
     @SerializedName("creator")
     public Author creator;
-//
-//    @SerializedName("comments")
-//    public ArrayList<UserComment> commentArrayList;
 
     public void setTitle(String title) {
         this.title = title;
@@ -65,7 +57,6 @@ public class Post extends BaseModel implements Parcelable, Serializable{
         dest.writeString(this.title);
         dest.writeString(this.imageUrl);
         dest.writeSerializable(this.creator);
-       // dest.writeSerializable(this.commentArrayList);
     }
 
     public Post() {
@@ -76,7 +67,6 @@ public class Post extends BaseModel implements Parcelable, Serializable{
         this.title = in.readString();
         this.imageUrl = in.readString();
         this.creator = (Author) in.readSerializable();
-       // this.commentArrayList = (ArrayList<UserComment>) in.readSerializable();
     }
 
     public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {

@@ -3,6 +3,7 @@ package co.infinum.skliba.zadatak5.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,20 +17,24 @@ import butterknife.OnClick;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.adapters.UserDialog;
+import co.infinum.skliba.zadatak5.helpers.MvpFactory;
+import co.infinum.skliba.zadatak5.models.LoginBody;
 import co.infinum.skliba.zadatak5.models.LoginResponse;
 import co.infinum.skliba.zadatak5.models.RegisterDataUser;
+import co.infinum.skliba.zadatak5.mvp.presenter.LoginPresenter;
+import co.infinum.skliba.zadatak5.mvp.view.LoginView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     public static final String TOKEN = "TOKEN";
     public static final String USER_DIALOG = "user-dialog";
     public static final String YOUFAILED = "YOUFAILED";
 
-    private RegisterDataUser user;
+    private LoginBody user;
 
     @Bind(R.id.btn_register)
     Button btnRegister;
@@ -43,20 +48,32 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.login_button)
     Button loginButton;
 
+    private LoginPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        presenter = MvpFactory.getPresenter(this);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkCredentials();
+                fillObject();
             }
         });
 
 
+    }
+
+    private void fillObject() {
+        user = new LoginBody();
+        user.setEmail(loginUsername.getText().toString());
+        user.setPassword(loginPassword.getText().toString());
+
+        presenter.login(user);
     }
 
     @OnClick(R.id.btn_register)
@@ -65,26 +82,22 @@ public class LoginActivity extends AppCompatActivity {
                 .show(getSupportFragmentManager(), USER_DIALOG);
     }
 
-    private void checkCredentials() {
-        user = new RegisterDataUser();
-        user.setEmail(loginUsername.getText().toString());
-        user.setPassword(loginPassword.getText().toString());
-        ApiManager.getService().login(user, new Callback<LoginResponse>() {
-            @Override
-            public void success(LoginResponse response, Response response2) {
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-                        .putString(TOKEN, response.getResponse().getToken()).apply();
-                Intent intent = new Intent(LoginActivity.this, BoatsActivity.class);
-                startActivity(intent);
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                if(error.getMessage().contains("404")){
-                    Toast.makeText(getApplicationContext(), getString(R.string.WrongUserNameAndPassword), Toast.LENGTH_LONG).show();
-                }
-                Log.e(YOUFAILED, error.getMessage());
-            }
-        });
+    @Override
+    public void showError(@StringRes int error) {
+
+    }
+
+    @Override
+    public void onLogin(LoginResponse response) {
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+                .putString(TOKEN, response.getResponse().getToken()).apply();
+        Intent intent = new Intent(LoginActivity.this, BoatsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onError(String error) {
+        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
     }
 }

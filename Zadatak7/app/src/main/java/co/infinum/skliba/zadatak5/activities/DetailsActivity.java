@@ -75,7 +75,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     protected void onRestart() {
         super.onRestart();
         Log.e("RESTARTER", "RESTARTED");
-        
+
         presenter = MvpFactory.getPresenter(this);
         presenter.getCommentsPerPost(post, token);
     }

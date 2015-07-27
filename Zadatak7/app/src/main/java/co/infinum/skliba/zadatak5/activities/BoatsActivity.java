@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,16 +23,19 @@ import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.adapters.BoatsAdapter;
 import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.api.DbFlowPosts;
+import co.infinum.skliba.zadatak5.helpers.MvpFactory;
 import co.infinum.skliba.zadatak5.interfaces.BoatsClickListener;
 import co.infinum.skliba.zadatak5.models.BoatsResponse;
 import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.mvp.presenter.BoatsPresenter;
+import co.infinum.skliba.zadatak5.mvp.view.BoatsView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedByteArray;
 
 
-public class BoatsActivity extends AppCompatActivity implements BoatsClickListener {
+public class BoatsActivity extends AppCompatActivity implements BoatsClickListener, BoatsView {
 
     public static final String TOKEN = "TOKEN";
     public static final String ARRAY_LIST = "ARRAY LIST";
@@ -44,6 +48,7 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
     private BoatsAdapter adapter;
     private DbFlowPosts posts;
     private Post post;
+    private BoatsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +62,15 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
 
         posts = new DbFlowPosts();
 
+        presenter = MvpFactory.getPresenter(this);
+
         if (savedInstanceState != null) {
             adapter = new BoatsAdapter(this, ((ArrayList<Post>) savedInstanceState.getSerializable(ARRAY_LIST)), this);
             postList.setAdapter(adapter);
         } else {
             if (checkIfConnectionExists()){
                 posts.dropAllPosts();
-                fetchData();
-
+                presenter.onFetchBoats(token);
             }
             else {
                 adapter = new BoatsAdapter(this, (ArrayList<Post>) posts.getPosts(), this);
@@ -73,36 +79,10 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
         }
     }
 
-
     private boolean checkIfConnectionExists() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return ni != null;
-    }
-
-    private void fetchData() {
-        ApiManager.getService().getAllBoats(token, new Callback<BoatsResponse>() {
-            @Override
-            public void success(BoatsResponse boatsResponse, Response response) {
-
-                posts.dropAllPosts();
-                adapter = new BoatsAdapter(BoatsActivity.this, boatsResponse.getRespose(), BoatsActivity.this);
-                postList.setAdapter(adapter);
-                Log.e("SUCCESS", "BRAVO");
-
-                ArrayList<Post> post = boatsResponse.getRespose();
-                for (int i = 0; i < post.size(); i++) {
-                    posts.addPost(post.get(i));
-                }
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-                Log.e("FAILED", "" + error.getMessage());
-            }
-        });
     }
 
     @Override
@@ -138,5 +118,22 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBoatsRecieved(ArrayList<Post> arrayList) {
+        posts.dropAllPosts();
+        adapter = new BoatsAdapter(BoatsActivity.this, arrayList, BoatsActivity.this);
+        postList.setAdapter(adapter);
+        Log.e("SUCCESS", "BRAVO");
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            posts.addPost(arrayList.get(i));
+        }
+    }
+
+    @Override
+    public void showError(@StringRes int error) {
+
     }
 }
