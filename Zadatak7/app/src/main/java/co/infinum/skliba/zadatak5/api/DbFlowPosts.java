@@ -4,7 +4,7 @@ import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import java.util.List;
 import co.infinum.skliba.zadatak5.interfaces.DatabaseManager;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 
 
 /**

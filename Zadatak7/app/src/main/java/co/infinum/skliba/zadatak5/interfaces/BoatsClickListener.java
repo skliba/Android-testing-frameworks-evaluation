@@ -1,8 +1,6 @@
 package co.infinum.skliba.zadatak5.interfaces;
 
-import android.view.View;
-
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 
 /**
  * Created by noxqs on 20.07.15..

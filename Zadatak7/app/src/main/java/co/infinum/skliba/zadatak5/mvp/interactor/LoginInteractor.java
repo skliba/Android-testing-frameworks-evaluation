@@ -1,6 +1,6 @@
 package co.infinum.skliba.zadatak5.mvp.interactor;
 
-import co.infinum.skliba.zadatak5.models.LoginBody;
+import co.infinum.skliba.zadatak5.models.login.LoginBody;
 import co.infinum.skliba.zadatak5.mvp.listeners.LoginListener;
 
 /**

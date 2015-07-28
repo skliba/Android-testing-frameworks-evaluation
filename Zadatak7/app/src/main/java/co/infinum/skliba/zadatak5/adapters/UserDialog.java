@@ -14,16 +14,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.api.ApiManager;
-import co.infinum.skliba.zadatak5.models.ErrorResponse;
-import co.infinum.skliba.zadatak5.models.RegisterDataUser;
-import co.infinum.skliba.zadatak5.models.LoginResponse;
-import co.infinum.skliba.zadatak5.models.RegisterData;
+import co.infinum.skliba.zadatak5.models.errors.ErrorResponse;
+import co.infinum.skliba.zadatak5.models.register.RegisterDataUser;
+import co.infinum.skliba.zadatak5.models.login.LoginResponse;
+import co.infinum.skliba.zadatak5.models.register.RegisterData;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

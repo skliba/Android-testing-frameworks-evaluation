@@ -1,7 +1,7 @@
 package co.infinum.skliba.zadatak5.mvp.interactor.impl;
 
 import co.infinum.skliba.zadatak5.api.PostsApplication;
-import co.infinum.skliba.zadatak5.models.BoatsResponse;
+import co.infinum.skliba.zadatak5.models.boats.BoatsResponse;
 import co.infinum.skliba.zadatak5.mvp.interactor.BoatsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.BoatsListener;
 import retrofit.Callback;

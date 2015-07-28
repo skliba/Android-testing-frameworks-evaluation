@@ -14,7 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 
 import co.infinum.skliba.zadatak5.interfaces.BoatsClickListener;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.R;
 
 /**
@@ -42,6 +42,7 @@ public class BoatsAdapter extends RecyclerView.Adapter<BoatsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(arrList.get(position).title);
+        holder.subtitle.setText(context.getString(R.string.comments_num, arrList.get(position).getListCount()));
         Glide.with(context).load(arrList.get(position).imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.picture);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +68,13 @@ public class BoatsAdapter extends RecyclerView.Adapter<BoatsAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
+        TextView subtitle;
         ImageView picture;
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.post_title);
+            subtitle = (TextView) itemView.findViewById(R.id.number_of_comments);
             picture = (ImageView) itemView.findViewById(R.id.post_picture);
         }
 

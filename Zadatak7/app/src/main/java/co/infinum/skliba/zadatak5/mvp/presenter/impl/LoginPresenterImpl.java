@@ -1,9 +1,8 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
-import co.infinum.skliba.zadatak5.models.LoginBody;
-import co.infinum.skliba.zadatak5.models.LoginResponse;
+import co.infinum.skliba.zadatak5.models.login.LoginBody;
+import co.infinum.skliba.zadatak5.models.login.LoginResponse;
 import co.infinum.skliba.zadatak5.mvp.interactor.LoginInteractor;
-import co.infinum.skliba.zadatak5.mvp.interactor.impl.LoginInteractorImpl;
 import co.infinum.skliba.zadatak5.mvp.listeners.LoginListener;
 import co.infinum.skliba.zadatak5.mvp.presenter.LoginPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.LoginView;

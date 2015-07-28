@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.presenter.CommentPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.CommentsView;
 

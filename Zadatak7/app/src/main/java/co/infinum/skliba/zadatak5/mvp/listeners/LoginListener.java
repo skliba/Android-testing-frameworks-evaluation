@@ -1,6 +1,6 @@
 package co.infinum.skliba.zadatak5.mvp.listeners;
 
-import co.infinum.skliba.zadatak5.models.LoginResponse;
+import co.infinum.skliba.zadatak5.models.login.LoginResponse;
 
 /**
  * Created by noxqs on 28.07.15..

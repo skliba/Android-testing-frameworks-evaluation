@@ -1,14 +1,13 @@
 package co.infinum.skliba.zadatak5.interfaces;
 
 
-import co.infinum.skliba.zadatak5.models.BoatsResponse;
-import co.infinum.skliba.zadatak5.models.CommentsResponse;
-import co.infinum.skliba.zadatak5.models.CreateCommentBody;
-import co.infinum.skliba.zadatak5.models.CreateCommentResponse;
-import co.infinum.skliba.zadatak5.models.LoginBody;
-import co.infinum.skliba.zadatak5.models.LoginResponse;
-import co.infinum.skliba.zadatak5.models.RegisterDataUser;
-import co.infinum.skliba.zadatak5.models.RegisterData;
+import co.infinum.skliba.zadatak5.models.boats.BoatsResponse;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
+import co.infinum.skliba.zadatak5.models.comments.CreateCommentBody;
+import co.infinum.skliba.zadatak5.models.comments.CreateCommentResponse;
+import co.infinum.skliba.zadatak5.models.login.LoginBody;
+import co.infinum.skliba.zadatak5.models.login.LoginResponse;
+import co.infinum.skliba.zadatak5.models.register.RegisterData;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;

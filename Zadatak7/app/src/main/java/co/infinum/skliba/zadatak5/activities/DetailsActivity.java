@@ -24,9 +24,8 @@ import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.adapters.CommentsAdapter;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
-import co.infinum.skliba.zadatak5.models.CommentsResponse;
-import co.infinum.skliba.zadatak5.models.CommentsResponseBody;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponseBody;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.presenter.DetailsPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.DetailsView;
 

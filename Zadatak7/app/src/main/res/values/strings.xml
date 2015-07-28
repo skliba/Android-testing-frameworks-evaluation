@@ -25,4 +25,5 @@
     <string name="upboatButtonText">UPBOAT</string>
     <string name="title_activity_new_comment">NewComment</string>
     <string name="savebutton">Save</string>
+    <string name="comments_num" formatted="false">Comments: %d</string>
 </resources>

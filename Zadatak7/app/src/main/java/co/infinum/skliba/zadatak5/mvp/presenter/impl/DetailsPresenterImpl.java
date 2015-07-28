@@ -1,8 +1,8 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
 import co.infinum.skliba.zadatak5.R;
-import co.infinum.skliba.zadatak5.models.CommentsResponse;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.interactor.DetailsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.DetailsListener;
 import co.infinum.skliba.zadatak5.mvp.presenter.DetailsPresenter;

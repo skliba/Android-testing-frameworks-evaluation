@@ -10,9 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import co.infinum.skliba.zadatak5.R;
-import co.infinum.skliba.zadatak5.models.CommentsResponse;
-import co.infinum.skliba.zadatak5.models.CommentsResponseBody;
-import co.infinum.skliba.zadatak5.models.UserComment;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponseBody;
+
 
 /**
  * Created by noxqs on 26.07.15..

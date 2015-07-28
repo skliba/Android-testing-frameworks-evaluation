@@ -1,6 +1,6 @@
 package co.infinum.skliba.zadatak5.mvp.interactor;
 
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.listeners.DetailsListener;
 
 /**

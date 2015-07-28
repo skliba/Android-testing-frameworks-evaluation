@@ -21,18 +21,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.adapters.BoatsAdapter;
-import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.api.DbFlowPosts;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
 import co.infinum.skliba.zadatak5.interfaces.BoatsClickListener;
-import co.infinum.skliba.zadatak5.models.BoatsResponse;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.presenter.BoatsPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.BoatsView;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-import retrofit.mime.TypedByteArray;
 
 
 public class BoatsActivity extends AppCompatActivity implements BoatsClickListener, BoatsView {

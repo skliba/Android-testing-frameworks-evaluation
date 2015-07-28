@@ -2,7 +2,7 @@ package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
 import java.util.ArrayList;
 
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.interactor.BoatsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.BoatsListener;
 import co.infinum.skliba.zadatak5.mvp.presenter.BoatsPresenter;

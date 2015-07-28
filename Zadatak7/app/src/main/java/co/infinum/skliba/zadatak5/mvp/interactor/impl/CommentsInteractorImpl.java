@@ -3,9 +3,9 @@ package co.infinum.skliba.zadatak5.mvp.interactor.impl;
 import android.util.Log;
 
 import co.infinum.skliba.zadatak5.api.PostsApplication;
-import co.infinum.skliba.zadatak5.models.CreateCommentBody;
-import co.infinum.skliba.zadatak5.models.CreateCommentBodyContent;
-import co.infinum.skliba.zadatak5.models.CreateCommentResponse;
+import co.infinum.skliba.zadatak5.models.comments.CreateCommentBody;
+import co.infinum.skliba.zadatak5.models.comments.CreateCommentBodyContent;
+import co.infinum.skliba.zadatak5.models.comments.CreateCommentResponse;
 import co.infinum.skliba.zadatak5.mvp.interactor.CommentsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.CommentsListener;
 import retrofit.Callback;

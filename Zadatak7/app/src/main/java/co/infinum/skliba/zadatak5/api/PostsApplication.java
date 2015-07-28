@@ -5,7 +5,6 @@ import android.app.Application;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import co.infinum.skliba.zadatak5.interfaces.BoatsService;
-import co.infinum.skliba.zadatak5.models.Post;
 
 /**
  * Created by noxqs on 22.07.15..

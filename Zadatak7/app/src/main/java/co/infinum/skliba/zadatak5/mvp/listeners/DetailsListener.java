@@ -1,7 +1,7 @@
 package co.infinum.skliba.zadatak5.mvp.listeners;
 
-import co.infinum.skliba.zadatak5.models.CommentsResponse;
-import co.infinum.skliba.zadatak5.models.Post;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
+import co.infinum.skliba.zadatak5.models.boats.Post;
 
 /**
  * Created by noxqs on 26.07.15..

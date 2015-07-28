@@ -1,17 +1,13 @@
-package co.infinum.skliba.zadatak5.models;
+package co.infinum.skliba.zadatak5.models.boats;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.Table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import co.infinum.skliba.zadatak5.api.PostsDatabase;
 
 /**
  * Created by noxqs on 18.07.15..
@@ -20,6 +16,7 @@ public class BoatsResponse implements Serializable, Parcelable{
 
     @SerializedName("response")
     private ArrayList<Post> postsList;
+
 
     public ArrayList<Post> getRespose() {
         return postsList;

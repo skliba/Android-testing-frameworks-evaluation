@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,17 +14,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.infinum.skliba.zadatak5.R;
-import co.infinum.skliba.zadatak5.api.ApiManager;
 import co.infinum.skliba.zadatak5.adapters.UserDialog;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
-import co.infinum.skliba.zadatak5.models.LoginBody;
-import co.infinum.skliba.zadatak5.models.LoginResponse;
-import co.infinum.skliba.zadatak5.models.RegisterDataUser;
+import co.infinum.skliba.zadatak5.models.login.LoginBody;
+import co.infinum.skliba.zadatak5.models.login.LoginResponse;
 import co.infinum.skliba.zadatak5.mvp.presenter.LoginPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.LoginView;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
