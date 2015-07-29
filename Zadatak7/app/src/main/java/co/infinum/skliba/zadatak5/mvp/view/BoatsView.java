@@ -11,4 +11,6 @@ public interface BoatsView extends BaseView {
 
     void onBoatsRecieved(ArrayList<Post> arrayList);
 
+    void onTokenExpired();
+
 }

@@ -9,10 +9,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -21,11 +22,12 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.adapters.CommentsAdapter;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
-import co.infinum.skliba.zadatak5.models.comments.CommentsResponseBody;
 import co.infinum.skliba.zadatak5.models.boats.Post;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponseBody;
 import co.infinum.skliba.zadatak5.mvp.presenter.DetailsPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.DetailsView;
 
@@ -41,17 +43,27 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     @Bind(R.id.comment_list_view)
     RecyclerView commentListView;
 
-    private CommentsAdapter commentsAdapter;
+    @Bind(R.id.button_upboat)
+    Button buttonUpboat;
+
+    @Bind(R.id.button_downboat)
+    Button buttonDownboat;
+
     private Post post;
+    private String token;
+    private static int cntUpboat = 0;
+    private static int cntDownboat = 0;
 
     private DetailsPresenter presenter;
-    private String token;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
+        cntUpboat = 0;
+        cntDownboat = 0;
 
         commentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -73,8 +85,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e("RESTARTER", "RESTARTED");
-
         presenter = MvpFactory.getPresenter(this);
         presenter.getCommentsPerPost(post, token);
     }
@@ -122,13 +132,49 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
 
     @Override
     public void onCommentsRecieved(ArrayList<CommentsResponseBody> response) {
-        commentsAdapter = new CommentsAdapter(response, this);
+        CommentsAdapter commentsAdapter = new CommentsAdapter(response, this);
         commentListView.setAdapter(commentsAdapter);
     }
 
-
     @Override
     public void showError(@StringRes int error) {
+        Toast.makeText(getApplicationContext(), getString(R.string.PostDetailsError), Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.button_downboat)
+    void onClickDownboat(){
+        presenter.onDownboatClicked(post);
+    }
+
+    @Override
+    public void onDownboatSuccess() {
+        if(cntDownboat == 0){
+            Toast.makeText(getApplicationContext(), "Successful downboat", Toast.LENGTH_SHORT).show();
+            cntDownboat++;
+            cntUpboat = 0;
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "You can press downboat button only once" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @OnClick(R.id.button_upboat)
+    void onClickUpboat(){
+        presenter.onUpboatClicked(post);
+    }
+
+    @Override
+    public void onUpboatSuccess() {
+        if(cntUpboat == 0){
+            Toast.makeText(getApplicationContext(), "Successful upboat", Toast.LENGTH_SHORT).show();
+            cntUpboat++;
+            cntDownboat = 0;
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "You can press upboat button only once" , Toast.LENGTH_SHORT).show();
+        }
 
     }
+
+
 }

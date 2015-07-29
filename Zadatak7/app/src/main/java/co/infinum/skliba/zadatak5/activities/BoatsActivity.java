@@ -28,7 +28,7 @@ import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.presenter.BoatsPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.BoatsView;
 
-//frane
+
 public class BoatsActivity extends AppCompatActivity implements BoatsClickListener, BoatsView {
 
     public static final String TOKEN = "TOKEN";

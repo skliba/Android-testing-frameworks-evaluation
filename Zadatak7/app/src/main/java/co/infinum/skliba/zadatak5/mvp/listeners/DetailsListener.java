@@ -1,5 +1,6 @@
 package co.infinum.skliba.zadatak5.mvp.listeners;
 
+import co.infinum.skliba.zadatak5.models.UpboatDownboat.UpboatDownboatResponse;
 import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
 import co.infinum.skliba.zadatak5.models.boats.Post;
 
@@ -15,4 +16,8 @@ public interface DetailsListener {
     void onTokenExpired();
 
     void onError(String error);
+
+    void onUpboat(UpboatDownboatResponse response);
+
+    void onDownboat(UpboatDownboatResponse response);
 }

@@ -36,5 +36,10 @@ public class BoatsPresenterImpl implements BoatsPresenter {
         public void onError(String error) {
 
         }
+
+        @Override
+        public void onTokenExpired() {
+            view.onTokenExpired();
+        }
     };
 }

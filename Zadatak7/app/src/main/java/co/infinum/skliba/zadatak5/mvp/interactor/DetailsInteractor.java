@@ -11,4 +11,8 @@ public interface DetailsInteractor {
     void getDetails(DetailsListener listener);
 
     void getComments(DetailsListener listener, Post post, String token);
+
+    void onDownboat(DetailsListener listener, Post post);
+
+    void onUpboat(DetailsListener listener, Post post);
 }

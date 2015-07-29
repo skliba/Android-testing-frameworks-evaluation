@@ -12,4 +12,6 @@ public interface BoatsListener {
     void onBoatsRecieved(ArrayList<Post> postList);
 
     void onError(String error);
+
+    void onTokenExpired();
 }

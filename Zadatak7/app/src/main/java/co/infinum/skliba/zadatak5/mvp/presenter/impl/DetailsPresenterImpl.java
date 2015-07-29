@@ -1,6 +1,7 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
 import co.infinum.skliba.zadatak5.R;
+import co.infinum.skliba.zadatak5.models.UpboatDownboat.UpboatDownboatResponse;
 import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
 import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.interactor.DetailsInteractor;
@@ -32,6 +33,19 @@ public class DetailsPresenterImpl implements DetailsPresenter {
         detailsInteractor.getComments(listener, post, token);
     }
 
+    @Override
+    public void onUpboatClicked(Post post) {
+        detailsInteractor.onUpboat(listener, post);
+    }
+
+    @Override
+    public void onDownboatClicked(Post post) {
+        detailsInteractor.onDownboat(listener, post);
+    }
+
+
+
+
     private DetailsListener listener = new DetailsListener() {
         @Override
         public void onDetailsRecieved(Post post) {
@@ -41,7 +55,6 @@ public class DetailsPresenterImpl implements DetailsPresenter {
         @Override
         public void onCommentsRecieved(CommentsResponse response) {
             view.onCommentsRecieved(response.getResponse());
-
         }
 
         @Override
@@ -53,15 +66,17 @@ public class DetailsPresenterImpl implements DetailsPresenter {
         public void onError(String error) {
             view.showError(R.string.PostDetailsError);
         }
+
+        @Override
+        public void onUpboat(UpboatDownboatResponse response) {
+            view.onUpboatSuccess();
+        }
+
+        @Override
+        public void onDownboat(UpboatDownboatResponse response) {
+            view.onDownboatSuccess();
+        }
     };
 
-    @Override
-    public void onUpboatClicked() {
 
-    }
-
-    @Override
-    public void onDownboatClicked() {
-
-    }
 }

@@ -21,8 +21,4 @@ public class SharedPrefsHelper {
         return prefs.getString(TOKEN, null);
     }
 
-    public static void setToken(Context context, String token) {
-        SharedPreferences prefs = getPreferences(context);
-        prefs.edit().putString(TOKEN, token).apply();
-    }
 }

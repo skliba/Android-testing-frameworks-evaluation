@@ -16,4 +16,8 @@ public interface DetailsView extends BaseView{
 
     void onCommentsRecieved(ArrayList<CommentsResponseBody> response);
 
+    void onUpboatSuccess();
+
+    void onDownboatSuccess();
+
 }

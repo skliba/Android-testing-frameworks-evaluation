@@ -11,8 +11,8 @@ public interface DetailsPresenter {
 
     void getCommentsPerPost(Post post, String token);
 
-    void onUpboatClicked();
+    void onUpboatClicked(Post post);
 
-    void onDownboatClicked();
+    void onDownboatClicked(Post post);
 
 }

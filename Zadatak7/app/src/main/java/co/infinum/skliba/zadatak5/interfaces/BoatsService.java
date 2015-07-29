@@ -1,6 +1,7 @@
 package co.infinum.skliba.zadatak5.interfaces;
 
 
+import co.infinum.skliba.zadatak5.models.UpboatDownboat.UpboatDownboatResponse;
 import co.infinum.skliba.zadatak5.models.boats.BoatsResponse;
 import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
 import co.infinum.skliba.zadatak5.models.comments.CreateCommentBody;
@@ -42,4 +43,15 @@ public interface BoatsService {
     void getAllComments(@Path("post_id") String postId,
                         @Query("token") String token,
                         Callback<CommentsResponse> callback);
+
+
+    @GET("/api/v1/posts/{id}/upboat")
+    void upboat(@Path("id") String id,
+                @Query("token") String token,
+                Callback<UpboatDownboatResponse> callback);
+
+    @GET("/api/v1/posts/{id}/downboat")
+    void downboat(@Path("id") String id,
+                  @Query("token") String token,
+                  Callback<UpboatDownboatResponse> callback);
 }
