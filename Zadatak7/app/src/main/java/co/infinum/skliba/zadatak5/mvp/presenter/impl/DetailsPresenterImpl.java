@@ -1,5 +1,7 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
+import android.text.format.Time;
+
 import java.util.ArrayList;
 
 import co.infinum.skliba.zadatak5.R;
@@ -47,8 +49,6 @@ public class DetailsPresenterImpl implements DetailsPresenter {
     }
 
 
-
-
     private DetailsListener listener = new DetailsListener() {
         @Override
         public void onDetailsRecieved(Post post) {
@@ -85,6 +85,17 @@ public class DetailsPresenterImpl implements DetailsPresenter {
     private void modifyTime(CommentsResponse response) {
         ArrayList<CommentsResponseBody> body = response.getResponse();
 
+        for (CommentsResponseBody responseBody : body) {
+            String time = responseBody.getTime();
+
+            Time timeF = new Time();
+            if (time != null) {
+                if (timeF.parse3339(time)) {
+
+
+                }
+            }
+        }
     }
 
 
