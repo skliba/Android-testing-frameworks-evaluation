@@ -1,9 +1,12 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
+import java.util.ArrayList;
+
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.models.UpboatDownboat.UpboatDownboatResponse;
 import co.infinum.skliba.zadatak5.models.comments.CommentsResponse;
 import co.infinum.skliba.zadatak5.models.boats.Post;
+import co.infinum.skliba.zadatak5.models.comments.CommentsResponseBody;
 import co.infinum.skliba.zadatak5.mvp.interactor.DetailsInteractor;
 import co.infinum.skliba.zadatak5.mvp.listeners.DetailsListener;
 import co.infinum.skliba.zadatak5.mvp.presenter.DetailsPresenter;
@@ -54,6 +57,7 @@ public class DetailsPresenterImpl implements DetailsPresenter {
 
         @Override
         public void onCommentsRecieved(CommentsResponse response) {
+            modifyTime(response);
             view.onCommentsRecieved(response.getResponse());
         }
 
@@ -77,6 +81,11 @@ public class DetailsPresenterImpl implements DetailsPresenter {
             view.onDownboatSuccess();
         }
     };
+
+    private void modifyTime(CommentsResponse response) {
+        ArrayList<CommentsResponseBody> body = response.getResponse();
+
+    }
 
 
 }

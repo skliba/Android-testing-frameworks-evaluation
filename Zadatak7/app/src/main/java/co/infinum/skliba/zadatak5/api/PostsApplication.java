@@ -14,6 +14,7 @@ public class PostsApplication extends Application{
 
     private static PostsApplication instance;
     private static Context context;
+    protected ApiManager apiManager;
 
     @Override
     public void onCreate() {
@@ -24,8 +25,10 @@ public class PostsApplication extends Application{
         FlowManager.init(this);
     }
 
-    private void init() {
-        ApiManager.getInstance().init();
+    protected void init() {
+        ApiManagerImpl.getInstance().init();
+
+        apiManager = ApiManagerImpl.getInstance();
     }
 
     public static PostsApplication getInstance(){
@@ -33,7 +36,7 @@ public class PostsApplication extends Application{
     }
 
     public static BoatsService getApiService() {
-        return ApiManager.getInstance().getDetailsService();
+        return ApiManagerImpl.getInstance().getService();
     }
 
     public static Context getMyContext(){

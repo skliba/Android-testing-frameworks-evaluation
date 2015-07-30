@@ -128,7 +128,7 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
 
     @Override
     public void onTokenExpired() {
-        
+
     }
 
     @Override

@@ -49,11 +49,13 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     public class CommentsViewHolder extends RecyclerView.ViewHolder {
 
         public TextView commentAuthor;
+        public TextView commentTime;
         public TextView commentContent;
 
         public CommentsViewHolder(View itemView) {
             super(itemView);
             commentAuthor = (TextView) itemView.findViewById(R.id.comment_by);
+            commentTime = (TextView) itemView.findViewById(R.id.comment_time);
             commentContent = (TextView) itemView.findViewById(R.id.comment_content);
         }
     }

@@ -1,5 +1,7 @@
 package co.infinum.skliba.zadatak5.mvp.interactor.impl;
 
+import android.util.Log;
+
 import co.infinum.skliba.zadatak5.api.PostsApplication;
 import co.infinum.skliba.zadatak5.models.login.LoginBody;
 import co.infinum.skliba.zadatak5.models.login.LoginResponse;
@@ -31,6 +33,7 @@ public class LoginInteractorImpl implements LoginInteractor {
 
         @Override
         public void failure(RetrofitError error) {
+            Log.e("ERROR", error.getMessage());
             listener.onError(error.getMessage());
         }
     };

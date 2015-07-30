@@ -18,7 +18,8 @@ import com.google.gson.Gson;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.infinum.skliba.zadatak5.R;
-import co.infinum.skliba.zadatak5.api.ApiManager;
+import co.infinum.skliba.zadatak5.api.ApiManagerImpl;
+import co.infinum.skliba.zadatak5.api.PostsApplication;
 import co.infinum.skliba.zadatak5.models.errors.ErrorResponse;
 import co.infinum.skliba.zadatak5.models.register.RegisterDataUser;
 import co.infinum.skliba.zadatak5.models.login.LoginResponse;
@@ -95,7 +96,7 @@ public class UserDialog extends DialogFragment {
                     fillObjectWithData();
                     registerData = new RegisterData();
                     registerData.setUser(registerDataUser);
-                    ApiManager.getService().register(registerData, new Callback<LoginResponse>() {
+                    PostsApplication.getApiService().register(registerData, new Callback<LoginResponse>() {
                         @Override
                         public void success(LoginResponse loginResponse, Response response) {
                             Toast.makeText(context, context.getString(R.string.RegisterSuccessful), Toast.LENGTH_LONG).show();

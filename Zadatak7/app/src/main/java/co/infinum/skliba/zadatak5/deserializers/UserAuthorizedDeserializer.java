@@ -17,11 +17,7 @@ public class UserAuthorizedDeserializer implements JsonDeserializer<UserAuthoriz
 
     @Override
     public UserAuthorized deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-
-        UserAuthorized authorized = UserAuthorized.fromKey(json.getAsInt());
-
-
-        return authorized;
+        return UserAuthorized.fromKey(json.getAsInt());
     }
 
     @Override

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="testText"
         android:id="@+id/comment_by"
@@ -15,12 +15,21 @@
         />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/comment_by"
+        android:layout_marginLeft="10dp"
+        tools:text="stgsdgsfghfghdfhdfhdf"
+        android:id="@+id/comment_time"
+        />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_below="@id/comment_by"
         android:layout_height="wrap_content"
         android:id="@+id/comment_content"
         android:textColor="@android:color/black"
-        tools:text="govnogovnogrgsdgfgdsgfddgsdg fgdfhdfhdf hdfghdfh df "
+        tools:text="hdfhdgfhdhghfgjfgjfghjfgjfgjfgjfgjkfgjfg "
         android:layout_marginTop="15dp"
         />
 
