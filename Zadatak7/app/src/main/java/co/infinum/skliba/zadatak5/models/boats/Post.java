@@ -10,6 +10,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import co.infinum.skliba.zadatak5.api.PostsDatabase;
@@ -35,7 +36,11 @@ public class Post extends BaseModel implements Parcelable, Serializable {
     public String imageUrl;
 
     @SerializedName("comments")
-    private List<CommentsResponseBody> list;
+    private ArrayList<CommentsResponseBody> list;
+
+    public ArrayList<CommentsResponseBody> getList() {
+        return list;
+    }
 
     public int getListCount() {
         return list != null && list.size() > 0 ? list.size() : 0;

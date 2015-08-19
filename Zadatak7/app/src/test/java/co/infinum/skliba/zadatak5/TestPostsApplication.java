@@ -8,6 +8,12 @@ import co.infinum.skliba.zadatak5.network.TestApiManager;
  */
 public class TestPostsApplication extends PostsApplication {
 
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
     @Override
     protected void init() {
         TestApiManager.getInstance().init();

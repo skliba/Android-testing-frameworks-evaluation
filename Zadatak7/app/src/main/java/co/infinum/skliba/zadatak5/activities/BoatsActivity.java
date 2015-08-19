@@ -24,12 +24,13 @@ import co.infinum.skliba.zadatak5.adapters.BoatsAdapter;
 import co.infinum.skliba.zadatak5.api.DbFlowPosts;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
 import co.infinum.skliba.zadatak5.interfaces.BoatsClickListener;
+import co.infinum.skliba.zadatak5.interfaces.ConnectivityChecker;
 import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.mvp.presenter.BoatsPresenter;
 import co.infinum.skliba.zadatak5.mvp.view.BoatsView;
 
 
-public class BoatsActivity extends AppCompatActivity implements BoatsClickListener, BoatsView {
+public class BoatsActivity extends AppCompatActivity implements BoatsClickListener, BoatsView, ConnectivityChecker {
 
     public static final String TOKEN = "TOKEN";
     public static final String ARRAY_LIST = "ARRAY LIST";
@@ -41,7 +42,6 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
     private String token;
     private BoatsAdapter adapter;
     private DbFlowPosts posts;
-    private Post post;
     private BoatsPresenter presenter;
 
     @Override
@@ -62,18 +62,18 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
             adapter = new BoatsAdapter(this, ((ArrayList<Post>) savedInstanceState.getSerializable(ARRAY_LIST)), this);
             postList.setAdapter(adapter);
         } else {
-            if (checkIfConnectionExists()){
+            if (checkIfConnectionExists()) {
                 posts.dropAllPosts();
                 presenter.onFetchBoats(token);
-            }
-            else {
+            } else {
                 adapter = new BoatsAdapter(this, (ArrayList<Post>) posts.getPosts(), this);
                 postList.setAdapter(adapter);
             }
         }
     }
 
-    private boolean checkIfConnectionExists() {
+    @Override
+    public boolean checkIfConnectionExists() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return ni != null;
@@ -135,4 +135,6 @@ public class BoatsActivity extends AppCompatActivity implements BoatsClickListen
     public void showError(@StringRes int error) {
 
     }
+
+
 }

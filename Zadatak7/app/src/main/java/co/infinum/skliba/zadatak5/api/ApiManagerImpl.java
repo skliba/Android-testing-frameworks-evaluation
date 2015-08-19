@@ -70,9 +70,7 @@ public class ApiManagerImpl implements ApiManager{
         setup(null, null, new OkClient(okHttpClient));
     }
 
-    public void init(Executor httpExecutor, Executor callbackExecutor, OkClient okClient) {
-        setup(httpExecutor, callbackExecutor, okClient);
-    }
+
 
     private void setup(Executor httpExecutor, Executor callbackExecutor, OkClient okClient) {
         RestAdapter.Builder builder = new RestAdapter.Builder()

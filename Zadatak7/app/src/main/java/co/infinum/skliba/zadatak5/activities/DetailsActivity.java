@@ -1,6 +1,9 @@
 package co.infinum.skliba.zadatak5.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -26,6 +29,7 @@ import butterknife.OnClick;
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.adapters.CommentsAdapter;
 import co.infinum.skliba.zadatak5.helpers.MvpFactory;
+import co.infinum.skliba.zadatak5.interfaces.ConnectivityChecker;
 import co.infinum.skliba.zadatak5.models.boats.Post;
 import co.infinum.skliba.zadatak5.models.comments.CommentsResponseBody;
 import co.infinum.skliba.zadatak5.mvp.presenter.DetailsPresenter;
@@ -76,6 +80,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
         presenter = MvpFactory.getPresenter(this);
         presenter.getCommentsPerPost(post, token);
 
+
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(post.title);
@@ -120,6 +125,8 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public void onDetailsRecieved(Post post) {
 
@@ -142,36 +149,34 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     }
 
     @OnClick(R.id.button_downboat)
-    void onClickDownboat(){
+    void onClickDownboat() {
         presenter.onDownboatClicked(post);
     }
 
     @Override
     public void onDownboatSuccess() {
-        if(cntDownboat == 0){
+        if (cntDownboat == 0) {
             Toast.makeText(getApplicationContext(), "Successful downboat", Toast.LENGTH_SHORT).show();
             cntDownboat++;
             cntUpboat = 0;
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "You can press downboat button only once" , Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "You can press downboat button only once", Toast.LENGTH_SHORT).show();
         }
     }
 
     @OnClick(R.id.button_upboat)
-    void onClickUpboat(){
+    void onClickUpboat() {
         presenter.onUpboatClicked(post);
     }
 
     @Override
     public void onUpboatSuccess() {
-        if(cntUpboat == 0){
+        if (cntUpboat == 0) {
             Toast.makeText(getApplicationContext(), "Successful upboat", Toast.LENGTH_SHORT).show();
             cntUpboat++;
             cntDownboat = 0;
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "You can press upboat button only once" , Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "You can press upboat button only once", Toast.LENGTH_SHORT).show();
         }
 
     }

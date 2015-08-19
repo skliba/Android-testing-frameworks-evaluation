@@ -17,7 +17,7 @@
     <string name="dialogPasswordRepeat">Password repeat</string>
     <string name="registerDialog">Register user</string>
     <string name="registerErrorFailure">"Email : "</string>
-    <string name="PostDetailsError">Error u detaljima brodova</string>
+    <string name="PostDetailsError">No connection available</string>
     <string name="registerErrorPassword">"Password : "</string>
     <string name="WrongUserNameAndPassword">Wrong username and password</string>
     <string name="RegisterSuccessful">Register successful, you may log in with your new info</string>
@@ -26,4 +26,12 @@
     <string name="title_activity_new_comment">NewComment</string>
     <string name="savebutton">Save</string>
     <string name="comments_num" formatted="false">Comments: %d</string>
+    <string name="days_singular_text">" day ago"</string>
+    <string name="days_plural_text">" days ago"</string>
+    <string name="hours_singular_text">" hour ago"</string>
+    <string name="hours_plural_text">" hours ago"</string>
+    <string name="minutes_singular_text">" minute ago"</string>
+    <string name="minutes_plural_text">" minutes ago"</string>
+    <string name="seconds_singular_text">" second ago"</string>
+    <string name="seconds_plural_text">" seconds ago"</string>
 </resources>

@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import co.infinum.skliba.zadatak5.interfaces.BoatsService;
 
 /**
@@ -22,6 +24,7 @@ public class PostsApplication extends Application{
         instance = this;
         PostsApplication.context = getApplicationContext();
         init();
+        JodaTimeAndroid.init(this);
         FlowManager.init(this);
     }
 

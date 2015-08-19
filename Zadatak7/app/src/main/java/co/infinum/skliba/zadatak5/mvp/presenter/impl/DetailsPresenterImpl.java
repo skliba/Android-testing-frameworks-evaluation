@@ -1,8 +1,19 @@
 package co.infinum.skliba.zadatak5.mvp.presenter.impl;
 
-import android.text.format.Time;
 
+import android.util.Log;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Seconds;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 import co.infinum.skliba.zadatak5.R;
 import co.infinum.skliba.zadatak5.models.UpboatDownboat.UpboatDownboatResponse;
@@ -57,8 +68,8 @@ public class DetailsPresenterImpl implements DetailsPresenter {
 
         @Override
         public void onCommentsRecieved(CommentsResponse response) {
-            modifyTime(response);
-            view.onCommentsRecieved(response.getResponse());
+            CommentsResponse modifiedResponse = modifyTime(response);
+            view.onCommentsRecieved(modifiedResponse.getResponse());
         }
 
         @Override
@@ -82,20 +93,45 @@ public class DetailsPresenterImpl implements DetailsPresenter {
         }
     };
 
-    private void modifyTime(CommentsResponse response) {
+    private CommentsResponse modifyTime(CommentsResponse response) {
         ArrayList<CommentsResponseBody> body = response.getResponse();
+        int days, hours, minutes, seconds;
 
         for (CommentsResponseBody responseBody : body) {
             String time = responseBody.getTime();
+            Log.e("TIME", "" + responseBody.getTime());
+            Log.e("CONTENT", "" + responseBody.getContent());
 
-            Time timeF = new Time();
-            if (time != null) {
-                if (timeF.parse3339(time)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat now = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date date = sdf.parse(time);
+                String formattedTime = output.format(date);
+                Log.e("FORMATTED TIME", formattedTime);
+                Date currDate = new Date();
+                String formattedCurrTime = now.format(currDate);
+                Log.e("FORMATTED CURRENT TIME", formattedCurrTime);
 
-
+                days = Days.daysBetween(new DateTime(date).plusHours(2), new DateTime(currDate)).getDays();
+                responseBody.setDaysPassed(days);
+                if (days == 0) {
+                    hours = Hours.hoursBetween(new DateTime(date).plusHours(2), new DateTime(currDate)).getHours();
+                    responseBody.setHoursPassed(hours);
+                    if (hours == 0) {
+                        minutes = Minutes.minutesBetween(new DateTime(date).plusHours(2), new DateTime(currDate)).getMinutes();
+                        responseBody.setMinutesPassed(minutes);
+                        if (minutes == 0) {
+                            seconds = Seconds.secondsBetween(new DateTime(date).plusHours(2), new DateTime(currDate)).getSeconds();
+                            responseBody.setSecondsPassed(seconds);
+                        }
+                    }
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
+        return response;
     }
 
 

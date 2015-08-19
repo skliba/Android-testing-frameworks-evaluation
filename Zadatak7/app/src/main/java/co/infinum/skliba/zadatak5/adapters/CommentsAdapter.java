@@ -38,7 +38,42 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
                 + " "
                 + userComments.get(position).author.getLastName());
 
+        setCommentTime(holder, position);
+
         holder.commentContent.setText(userComments.get(position).getContent());
+    }
+
+
+    private void setCommentTime(CommentsViewHolder holder, int position) {
+        if (userComments.get(position).getDaysPassed() != 0)
+        {
+            if (userComments.get(position).getDaysPassed() == 1)
+                holder.commentTime.setText(userComments.get(position).getDaysPassed() + context.getString(R.string.days_singular_text));
+            else
+                holder.commentTime.setText(userComments.get(position).getDaysPassed() + context.getString(R.string.days_plural_text));
+        }
+        else if (userComments.get(position).getHoursPassed() != 0)
+        {
+            if (userComments.get(position).getHoursPassed() == 1)
+                holder.commentTime.setText(userComments.get(position).getHoursPassed() + context.getString(R.string.hours_singular_text));
+            else
+                holder.commentTime.setText(userComments.get(position).getHoursPassed() + context.getString(R.string.hours_plural_text));
+        }
+        else if (userComments.get(position).getMinutesPassed() != 0)
+        {
+            if (userComments.get(position).getMinutesPassed() == 1)
+                holder.commentTime.setText(userComments.get(position).getMinutesPassed() + context.getString(R.string.minutes_singular_text));
+            else
+                holder.commentTime.setText(userComments.get(position).getMinutesPassed() + context.getString(R.string.minutes_plural_text));
+        }
+        else if (userComments.get(position).getSecondsPassed() != 0)
+        {
+            if (userComments.get(position).getSecondsPassed() == 1)
+                holder.commentTime.setText(userComments.get(position).getSecondsPassed() + context.getString(R.string.seconds_singular_text));
+            else
+                holder.commentTime.setText(userComments.get(position).getSecondsPassed() + context.getString(R.string.seconds_plural_text));
+        }
+
     }
 
     @Override
