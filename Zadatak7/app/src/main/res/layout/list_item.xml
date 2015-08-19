@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/default_spacing"
+    android:paddingBottom="@dimen/default_spacing"
+    android:paddingLeft="@dimen/default_spacing"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/post_picture"
+        android:layout_width="@dimen/list_image_size"
+        android:scaleType="centerCrop"
+        android:layout_height="@dimen/list_image_size"
+        android:layout_marginRight="@dimen/default_spacing"/>
+
+    <TextView
+        android:id="@+id/post_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/post_picture"
+        android:layout_marginRight="@dimen/default_spacing"
+        style="@style/ListItem.Title"
+        tools:text="Boat 1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/number_of_comments"
+        tools:text="hdhdfhdfhdf"
+        android:layout_below="@id/post_title"
+        android:layout_toRightOf="@id/post_picture"
+        android:layout_marginTop="15dp"/>
+
+    <View
+        android:layout_below="@+id/post_picture"
+        android:background="@color/grey"
+        android:layout_marginTop="@dimen/default_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+</RelativeLayout>
