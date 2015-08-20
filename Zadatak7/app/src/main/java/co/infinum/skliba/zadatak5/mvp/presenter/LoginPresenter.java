@@ -7,5 +7,5 @@ import co.infinum.skliba.zadatak5.models.login.LoginBody;
  */
 public interface LoginPresenter {
 
-    void login(LoginBody body);
+    void login(String username, String password);
 }

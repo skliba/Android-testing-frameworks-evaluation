@@ -61,10 +61,6 @@ public class TestApiManager implements ApiManager{
         setup(new SingleThreadExecutor(), new SingleThreadExecutor(), new OkClient(okHttpClient));
     }
 
-    public void init(Executor httpExecutor, Executor callbackExecutor, OkClient okClient) {
-        setup(httpExecutor, callbackExecutor, okClient);
-    }
-
     private void setup(Executor httpExecutor, Executor callbackExecutor, OkClient okClient){
         mockWebServer = new MockWebServer();
 

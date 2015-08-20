@@ -26,9 +26,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     public static final String TOKEN = "TOKEN";
     public static final String USER_DIALOG = "user-dialog";
-    public static final String YOUFAILED = "YOUFAILED";
-
-    private LoginBody user;
 
     @Bind(R.id.btn_register)
     Button btnRegister;
@@ -55,19 +52,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fillObject();
+                presenter.login(loginUsername.getText().toString(), loginPassword.getText().toString());
             }
         });
-
-
-    }
-
-    private void fillObject() {
-        user = new LoginBody();
-        user.setEmail(loginUsername.getText().toString());
-        user.setPassword(loginPassword.getText().toString());
-
-        presenter.login(user);
     }
 
     @OnClick(R.id.btn_register)

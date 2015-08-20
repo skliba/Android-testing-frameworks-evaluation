@@ -39,7 +39,7 @@ public class PostsApplication extends Application{
     }
 
     public static BoatsService getApiService() {
-        return ApiManagerImpl.getInstance().getService();
+        return getInstance().apiManager.getService();
     }
 
     public static Context getMyContext(){

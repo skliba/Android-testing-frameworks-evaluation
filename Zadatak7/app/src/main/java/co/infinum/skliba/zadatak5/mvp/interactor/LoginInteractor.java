@@ -8,5 +8,5 @@ import co.infinum.skliba.zadatak5.mvp.listeners.LoginListener;
  */
 public interface LoginInteractor {
 
-    void login(LoginListener listener, LoginBody body);
+    void login(LoginListener listener, String username, String password);
 }
