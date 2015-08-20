@@ -90,4 +90,7 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.3'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
+    //robotium
+    compile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+
 }
