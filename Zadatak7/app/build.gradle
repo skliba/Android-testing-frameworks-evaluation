@@ -37,7 +37,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:design:22.2.0'
-    compile 'com.android.support:support-v4:22.2.1'
+    androidTestCompile 'com.android.support:support-annotations:22.+'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
@@ -84,5 +84,10 @@ dependencies {
         exclude module: 'wagon-http-lightweight'
         exclude module: 'wagon-provider-api'
     }
+
+    // espresso tests
+    androidTestCompile 'com.android.support.test:runner:0.3'
+    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
 }
