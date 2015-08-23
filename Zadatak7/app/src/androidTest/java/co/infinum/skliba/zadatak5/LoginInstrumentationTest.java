@@ -54,7 +54,7 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
         Espresso.onView(ViewMatchers.withText("LOGIN"))
                 .perform(ViewActions.click());
 
-        Espresso.onView(ViewMatchers.withText("My Posts")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.list_view)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
 }

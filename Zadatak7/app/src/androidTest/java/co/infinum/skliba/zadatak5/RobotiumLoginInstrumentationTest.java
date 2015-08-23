@@ -1,6 +1,8 @@
 package co.infinum.skliba.zadatak5;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
@@ -48,11 +50,15 @@ public class RobotiumLoginInstrumentationTest extends ActivityInstrumentationTes
 
         solo.waitForActivity("LoginActivity", 2000);
 
-        solo.clearEditText(R.id.login_username);
-        solo.clearEditText(R.id.login_password);
+        solo.clearEditText(0);
+        solo.clearEditText(1);
 
-        solo.enterText(R.id.login_username, "admin@infinum.co");
-        solo.enterText(R.id.login_password, "infinum1");
+        solo.enterText(((EditText) solo.getView(R.id.login_username)),  "admin@infinum.co");
+        solo.enterText(((EditText) solo.getView(R.id.login_password)), "infinum1");
+
+        solo.clickOnButton(0);
+
+        solo.waitForActivity("BoatsActivity", 2000);
     }
 
 
