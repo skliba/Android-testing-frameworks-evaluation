@@ -30,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ic_logo"
+                android:id="@+id/ic_logo_text"
                 android:src="@drawable/ic_logo_text"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp" />
@@ -37,9 +38,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ic_logo"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="100dp"
+                android:id="@+id/view_holder_login"
+                android:layout_below="@+id/ic_logo_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
 
@@ -92,6 +94,8 @@
                 android:layout_alignParentBottom="true"
                 android:background="@android:color/transparent"
                 android:text="@string/registerLoginLayout"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/view_holder_login"
                 android:textColor="@android:color/white" />
 
         </RelativeLayout>

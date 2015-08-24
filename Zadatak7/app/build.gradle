@@ -8,7 +8,8 @@ android {
 
     defaultConfig {
         applicationId "co.infinum.skliba.zadatak5"
-        minSdkVersion 15
+        //min api level je inace 14, ali zbog uiautomatora sam morao staviti na 18
+        minSdkVersion 18
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -92,5 +93,8 @@ dependencies {
 
     //robotium
     compile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+
+    //uiautomator
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
 
 }

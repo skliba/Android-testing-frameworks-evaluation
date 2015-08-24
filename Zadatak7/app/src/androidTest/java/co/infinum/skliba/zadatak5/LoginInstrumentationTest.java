@@ -36,7 +36,7 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
     }
 
     @Test
-    public void testSuccessfulLogin(){
+    public void testSuccessfulLogin() {
         Espresso.onView(ViewMatchers.withId(R.id.login_username))
                 .perform(ViewActions.typeText("admin@infinum.co"));
 
@@ -53,6 +53,12 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
 
         Espresso.onView(ViewMatchers.withText("LOGIN"))
                 .perform(ViewActions.click());
+
+        try {
+            wait(5000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Espresso.onView(ViewMatchers.withId(R.id.list_view)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
