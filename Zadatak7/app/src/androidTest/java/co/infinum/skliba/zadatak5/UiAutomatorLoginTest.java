@@ -36,13 +36,13 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
         appViews.setAsHorizontalList();
 
         UiObject boatItApp = appViews.getChildByText(new UiSelector()
-                .className(android.widget.TextView.class.getName()),
+                        .className(android.widget.TextView.class.getName()),
                 "Zadatak5");
 
         boatItApp.clickAndWaitForNewWindow();
 
         UiObject validation = new UiObject(new UiSelector()
-        .packageName("co.infinum.skliba.zadatak5"));
+                .packageName("co.infinum.skliba.zadatak5"));
 
         assertTrue("Unable to find boatIt", validation.exists());
 
@@ -75,6 +75,12 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
             usernameEditText.setText("admin@infinum.co");
             passwordEditText.setText("infinum1");
             loginButton.click();
+
+            UiObject recyclerViewList = device.findObject(new UiSelector()
+                    .description("list_view")
+                    .className("android.support.v7.widget.RecyclerView"));
+
+            assertTrue("Package name wrong", recyclerViewList.exists());
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }

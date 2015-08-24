@@ -17,8 +17,6 @@ import co.infinum.skliba.zadatak5.activities.LoginActivity;
  */
 public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
-    private Activity activity;
-
     public LoginInstrumentationTest() {
         super(LoginActivity.class);
     }
@@ -27,7 +25,7 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
     protected void setUp() throws Exception {
         super.setUp();
         injectInstrumentation(InstrumentationRegistry.getInstrumentation());
-        activity = getActivity();
+        Activity activity = getActivity();
     }
 
     @Override
@@ -59,6 +57,7 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         Espresso.onView(ViewMatchers.withId(R.id.list_view)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
