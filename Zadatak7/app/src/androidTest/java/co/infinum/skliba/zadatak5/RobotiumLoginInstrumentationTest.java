@@ -58,7 +58,7 @@ public class RobotiumLoginInstrumentationTest extends ActivityInstrumentationTes
 
         solo.clickOnButton(0);
 
-        solo.waitForActivity("BoatsActivity", 2000);
+        assertTrue("RecyclerView not visible",  solo.getView(R.id.list_view).isShown());
     }
 
 

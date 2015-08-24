@@ -99,7 +99,7 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
                     .resourceId("co.infinum.skliba.zadatak5:id/details_picture"));
 
             //ista stvar kao i iznad, samo ! ispred booleana pokazat ce jel se izvrti taj dio koda
-            
+
             assertTrue("Image is not shown", detailsImage.exists());
 
         } catch (UiObjectNotFoundException | RemoteException e) {
