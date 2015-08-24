@@ -27,10 +27,6 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
 
         allAppsButton.clickAndWaitForNewWindow();
 
-        UiObject appsTab = new UiObject(new UiSelector().text("Apps"));
-
-        appsTab.click();
-
         UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
 
         appViews.setAsHorizontalList();
@@ -47,8 +43,6 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
         assertTrue("Unable to find boatIt", validation.exists());
 
         testLogin();
-
-
     }
 
     @Override
@@ -57,18 +51,18 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
 
     }
 
-    private void testLogin() {
+    public void testLogin() {
 
         UiObject loginButton = device.findObject(new UiSelector()
                 .text("LOGIN")
                 .className("android.widget.Button"));
 
         UiObject usernameEditText = device.findObject(new UiSelector()
-                .description("login_username")
+                .resourceId("co.infinum.skliba.zadatak5:id/login_username")
                 .className("android.widget.EditText"));
 
         UiObject passwordEditText = device.findObject(new UiSelector()
-                .description("login_password")
+                .resourceId("co.infinum.skliba.zadatak5:id/login_password")
                 .className("android.widget.EditText"));
 
         try {
@@ -77,8 +71,11 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
             loginButton.click();
 
             UiObject recyclerViewList = device.findObject(new UiSelector()
-                    .description("list_view")
+                    .resourceId("co.infinum.skliba.zadatak5:id/list_view")
                     .className("android.support.v7.widget.RecyclerView"));
+
+            //zbog iduce linije znamo da testovi prolaze, ukoliko to bude trebalo dokazat na obrani, stavit će se ! ispred recyclerViewList.exists(); onda bi trebao
+            //test baciti error
 
             assertTrue("Package name wrong", recyclerViewList.exists());
         } catch (UiObjectNotFoundException e) {
