@@ -1,12 +1,10 @@
 package co.infinum.skliba.zadatak5;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-import co.infinum.skliba.zadatak5.activities.LoginActivity;
 
 /**
  * Created by noxqs on 20.08.15..

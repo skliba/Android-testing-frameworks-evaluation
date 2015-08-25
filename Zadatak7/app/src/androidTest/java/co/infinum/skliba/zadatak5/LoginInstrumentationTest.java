@@ -8,6 +8,8 @@ import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import co.infinum.skliba.zadatak5.activities.LoginActivity;
@@ -21,6 +23,7 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
         super(LoginActivity.class);
     }
 
+    @Before
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -28,6 +31,7 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
         Activity activity = getActivity();
     }
 
+    @After
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
@@ -52,14 +56,24 @@ public class LoginInstrumentationTest extends ActivityInstrumentationTestCase2<L
         Espresso.onView(ViewMatchers.withText("LOGIN"))
                 .perform(ViewActions.click());
 
-        try {
-            wait(5000);
-        } catch (Exception e) {
+        try{
+            Thread.sleep(5000);
+            Espresso.onView(ViewMatchers.withId(R.id.login_username)).check(ViewAssertions.doesNotExist());
+            Espresso.onView(ViewMatchers.withId(R.id.list_view)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+            Espresso.onView(ViewMatchers.withId(R.id.list_view)).perform(ViewActions.click());
+            Thread.sleep(2000);
+
+            Espresso.onView(ViewMatchers.withId(R.id.details_picture)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+            Espresso.onView(ViewMatchers.withId(R.id.button_downboat)).perform(ViewActions.click());
+
+        }
+        catch (InterruptedException e){
             e.printStackTrace();
         }
 
 
-        Espresso.onView(ViewMatchers.withId(R.id.list_view)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+
     }
 
 }
