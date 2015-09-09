@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="co.infinum.skliba.zadatak5.activities.DetailsActivity">
+    tools:context="co.infinum.skliba.BoatIt.activities.DetailsActivity">
 
     <ImageView
         android:id="@+id/details_picture"

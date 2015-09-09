@@ -1,4 +1,4 @@
-package co.infinum.skliba.zadatak5.tests;
+package co.infinum.skliba.BoatIt.tests;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,11 +18,11 @@ import org.robolectric.util.ActivityController;
 
 import java.io.IOException;
 
-import co.infinum.skliba.zadatak5.R;
-import co.infinum.skliba.zadatak5.activities.LoginActivity;
-import co.infinum.skliba.zadatak5.network.TestApiManager;
-import co.infinum.skliba.zadatak5.TestPostsApplication;
-import co.infinum.skliba.zadatak5.utils.ResourceUtils;
+import co.infinum.skliba.BoatIt.R;
+import co.infinum.skliba.BoatIt.activities.LoginActivity;
+import co.infinum.skliba.BoatIt.network.TestApiManager;
+import co.infinum.skliba.BoatIt.TestPostsApplication;
+import co.infinum.skliba.BoatIt.utils.ResourceUtils;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

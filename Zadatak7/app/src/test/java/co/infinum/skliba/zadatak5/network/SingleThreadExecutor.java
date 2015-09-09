@@ -1,4 +1,4 @@
-package co.infinum.skliba.zadatak5.network;
+package co.infinum.skliba.BoatIt.network;
 
 import java.util.concurrent.Executor;
 

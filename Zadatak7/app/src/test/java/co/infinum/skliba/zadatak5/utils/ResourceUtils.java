@@ -1,4 +1,4 @@
-package co.infinum.skliba.zadatak5.utils;
+package co.infinum.skliba.BoatIt.utils;
 
 import java.io.InputStream;
 

@@ -7,13 +7,13 @@ android {
     buildToolsVersion "23.0.0 rc3"
 
     defaultConfig {
-        applicationId "co.infinum.skliba.zadatak5"
-        //min api level je inace 14, ali zbog uiautomatora sam morao staviti na 18
+        applicationId "co.infinum.skliba.BoatIt"
+        //min api is usually 14 but because of uiautomator it had to be 18
         minSdkVersion 18
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-        testApplicationId "co.infinum.skliba.zadatak5.instrument.test"
+        testApplicationId "co.infinum.skliba.BoatIt.instrument.test"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }

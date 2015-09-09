@@ -1,7 +1,7 @@
-package co.infinum.skliba.zadatak5;
+package co.infinum.skliba.BoatIt;
 
-import co.infinum.skliba.zadatak5.api.PostsApplication;
-import co.infinum.skliba.zadatak5.network.TestApiManager;
+import co.infinum.skliba.BoatIt.api.PostsApplication;
+import co.infinum.skliba.BoatIt.network.TestApiManager;
 
 /**
  * Created by noxqs on 29.07.15..

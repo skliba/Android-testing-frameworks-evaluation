@@ -1,4 +1,4 @@
-package co.infinum.skliba.zadatak5.network;
+package co.infinum.skliba.BoatIt.network;
 
 import android.util.Log;
 
@@ -11,12 +11,11 @@ import java.io.IOException;
 import java.net.CookieManager;
 import java.util.concurrent.Executor;
 
-import co.infinum.skliba.zadatak5.api.ApiManager;
-import co.infinum.skliba.zadatak5.api.ApiManagerImpl;
-import co.infinum.skliba.zadatak5.api.Interceptor;
-import co.infinum.skliba.zadatak5.deserializers.UserAuthorizedDeserializer;
-import co.infinum.skliba.zadatak5.enums.UserAuthorized;
-import co.infinum.skliba.zadatak5.interfaces.BoatsService;
+import co.infinum.skliba.BoatIt.api.ApiManager;
+import co.infinum.skliba.BoatIt.api.Interceptor;
+import co.infinum.skliba.BoatIt.deserializers.UserAuthorizedDeserializer;
+import co.infinum.skliba.BoatIt.enums.UserAuthorized;
+import co.infinum.skliba.BoatIt.interfaces.BoatsService;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
