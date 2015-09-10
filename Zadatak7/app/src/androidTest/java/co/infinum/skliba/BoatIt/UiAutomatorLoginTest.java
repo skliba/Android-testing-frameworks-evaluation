@@ -29,7 +29,7 @@ public class UiAutomatorLoginTest extends InstrumentationTestCase {
 
         allAppsButton.clickAndWaitForNewWindow();
 
-        UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
+        UiScrollable appViews = new UiScrollable(new UiSelector());
 
         appViews.setAsHorizontalList();
 
